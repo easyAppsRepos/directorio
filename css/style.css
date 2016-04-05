@@ -1,0 +1,215 @@
+/* Empty. Add your own CSS if you like */
+
+
+
+
+ion-side-menu ion-content {
+  background-color: #23262a; }
+ion-side-menu ion-item.item {
+  border-right: none;
+  border-left: none;
+  border-color: #33383e; }
+  ion-side-menu ion-item.item .item-content {
+    background-color: #23262a; }
+    ion-side-menu ion-item.item .item-content .icon:before {
+      background-color: #3E454C;
+      color: #FFFFFF;
+      border-radius: 50%;
+      font-size: 22px;
+      width: 32px;
+      height: 32px;
+      line-height: 32px; }
+  ion-side-menu ion-item.item .item-content.activated {
+    background-color: #555e68; }
+  ion-side-menu ion-item.item .menu-text {
+    color: #cccccc;
+    font-weight: 500; }
+ion-side-menu ion-item.item:first-child {
+  border-top: none; }
+ion-side-menu ion-item.item:last-child {
+  border-bottom: none; }
+ion-side-menu .heading-item .item-content {
+  height: 120px;
+  padding-top: 45px;
+  padding-left: 115px;
+  background-color: #272c30;
+  padding-bottom: 0px; }
+ion-side-menu .heading-item .user-image-container {
+  width: 90px;
+  position: absolute;
+  top: 16px;
+  left: 12px; }
+  ion-side-menu .heading-item .user-image-container .user-image {
+    border-radius: 50%;
+    padding: 8px;
+    border: 1px solid #999999;
+    width: 100%; }
+ion-side-menu .heading-item .greeting {
+  color: #FFFFFF;
+  font-weight: 500; }
+ion-side-menu .heading-item .message {
+  color: #999999; }
+
+
+
+.tabContainer{
+
+
+}
+.tabs-top > .tabs{
+top: 171px !important;
+background-color: rgb(238, 238, 238);
+}
+.busquedaPrincipal{
+width: 100%;
+
+}
+
+.favItems{
+
+	text-align: center;
+}
+
+.itemTS{
+
+	background-color: #fff;
+border-radius: 4px;
+border: solid 1px lightblue;
+}
+
+.itemTS img{    margin-top: 7px;
+}
+
+.itemFAV div{
+display: inline-block;
+vertical-align: middle;
+height: 70px;
+width: 130px;
+line-height: 1.3;
+
+}
+
+.itemFAV div a:first-child{
+	font-size: 20px;
+	width: 100px;
+	color: #666;
+}
+
+.itemFAV div a:nth-child(2){
+	font-size:13px;
+	float: left;
+	width: 100px;
+	color: #666;
+}
+.itemFAV div a:nth-child(3){
+	font-size:13px;
+	float: left;
+	width: 100px;
+color: darkkhaki !important;
+
+}
+
+.itemFAV img{
+height: 70px;
+width: 70px;
+vertical-align: middle;
+}
+
+a{color: #666 !important;}
+.buttonCall{
+	background-color: none;
+position: absolute;
+right: 0px;
+top: 25px;
+margin-right: 15px;
+
+}
+
+
+.borderBot{
+
+  border-bottom:  solid 2px#448aff !important;
+}
+.itemForms{
+margin-top: 2px;
+  background-color:rgb(234, 234, 234) !important;
+  border:none;
+}
+
+
+
+
+
+
+.modalSelect{
+
+width: 85%;
+min-height: 0 !important;
+height: 80% !important;
+top: 12%;
+left: 7.5%;
+right: 6%;
+bottom: 5%;
+background-color: transparent;
+border-radius: 10px;
+-webkit-box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+  background-color:#6BA2FF;
+  border-radius: 10px;
+}
+
+.ion-nifty-modal {
+  width: 90%;
+  min-height: 0 !important;
+  height:192px !important;
+  top: 25%;
+  left: 5%;
+  right: 5%;
+  bottom: 5%;
+  background-color: transparent;
+  border-radius: 10px;
+  -webkit-box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5); }
+
+
+
+.ion-nifty-modal .ion-modal-content-custom {
+  width: 100%;
+  height: 100%;
+  color: #FFF;
+  background-color:#A182D6;
+  border-radius: 10px; }
+
+/* Fix modal backdrop for smaller devices */
+@media (max-width: 679px) {
+  .active .modal-backdrop-bg {
+    opacity: .7; }
+  .modal-backdrop-bg {
+    -webkit-transition: opacity 300ms ease-in-out;
+    transition: opacity 300ms ease-in-out;
+    background-color: #000;
+    opacity: 0; } }
+
+
+
+/*
+ * http://docs.angularjs.org/api/ng/directive/ngShow#usage_animations
+ */
+.list .item.item-accordion {
+  line-height: 38px;
+  padding-top: 0;
+  padding-bottom: 0;
+  transition: 0.09s all linear;
+}
+.list .item.item-accordion.ng-hide {
+  line-height: 0px;
+}
+.list .item.item-accordion.ng-hide-add,
+.list .item.item-accordion.ng-hide-remove {
+  display: block !important;
+}
+
+.item-complex.item-icon-left.accor .item-content{
+
+  padding-left: 0px !important;
+background-color: #23262a !important;}

@@ -1,0 +1,93 @@
+  
+<ion-view view-title="Publicar comercio">
+
+
+         <ion-nav-buttons side="right">
+<a style="font-size: 27px; color: white ! important; background-color: transparent;" class="button bar-positive  ion-checkmark-circled disable-user-behavior">
+        
+      </a>
+   </ion-nav-buttons> 
+
+  <ion-content style='background-color: rgb(238, 238, 238);'>
+
+ 
+            <div>
+            <div>
+            <img src='img/camera.png' ng-click='selectPicture()'>
+            </div>
+            <div>
+        <center>
+            <img class='imagenPropuesta' ng-show="imgURI !== undefined" ng-src="{{imgURI}}" style="text-align: center">
+        </center>
+            </div>
+            </div>
+              <div class="list">
+
+        <label  class="borderBot item itemForms ">
+          <div style="color: rgb(102, 102, 102); ">Tipo de negocio</div>
+          </label>
+           
+              
+               <label class="item itemForms ">
+               
+               <ion-checkbox class='itemForms' ng-model="propuesta.chico" style='color: #666;font-size: 14px;'>Empresa</ion-checkbox>
+            <ion-checkbox class='itemForms' ng-model="propuesta.chica" style='color: #666;font-size: 14px;'>Particular</ion-checkbox>
+               </label>
+
+
+
+           <label  class="borderBot item itemForms "  >
+          <div style="color: rgb(102, 102, 102); ">Nombre</div>
+          </label>
+              <label class="item item-input " style="margin-top: 5px;">
+                <input ng-model='propuesta.precio' type="text" placeholder="Nombre del negocio">
+              </label>
+
+                      <label  ng-controller='BusquedaCtrl' class="borderBot item itemForms"  ng-click="openModal('fade-in-scale','my-modal2.html')">
+          <div  style="color: rgb(102, 102, 102); ">{{categoriaSeleccionada}}</div>
+          </label>
+
+
+
+          <label ng-controller='BusquedaCtrl' class="borderBot item itemForms"  ng-click="openModal('fade-in-scale','my-modal3.html')">
+          <div  style="color: rgb(102, 102, 102); ">{{subcategoriaSeleccionada}}</div>
+          </label>
+
+
+
+           <label  class="borderBot item itemForms ">
+          <div style="color: rgb(102, 102, 102); ">Descripcion</div>
+          </label>
+              <label
+                <label class="item " style="margin-top: 6px;">
+                 <textarea ng-model='propuesta.descripcion' style="width: 100%; height: 100px;" placeholder="Describe tu negocio" maxlength="150"></textarea>
+                 </label>
+
+
+
+
+           <label  class="borderBot item itemForms "  >
+          <div style="color: rgb(102, 102, 102); ">Numero de contacto</div>
+          </label>
+              <label class="item item-input " style="margin-top: 5px;">
+                <input ng-model='propuesta.precio' type="text" placeholder="Numero para contactar">
+              </label>
+
+
+
+           <label  class="borderBot item itemForms " >
+          <div style="color: rgb(102, 102, 102); ">Pagina web</div>
+          </label>
+              <label class="item item-input " style="margin-top: 5px;">
+                <input ng-model='propuesta.precio' type="text" placeholder="www.mipagina.com">
+              </label>
+
+
+
+
+            </div>
+            <div style="height: 24px"></div>
+
+             </ion-content>
+
+             </ion-view>

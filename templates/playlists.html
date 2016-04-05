@@ -1,0 +1,136 @@
+<ion-view view-title="">
+
+
+           <ion-nav-buttons side="left">
+          <button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
+        </ion-nav-buttons>  
+
+   
+
+  <ion-header-bar ng-click='abrirBusqueda()' class="bar bar-subheader bar-positive" style='height: 127px !important;'>
+          <div style="text-align: center">
+				<p style="font-size: 25px;margin-bottom: 0px;">Seekerline</p>
+				<p style="font-size: 13px;">Tu busqueda en linea</p>
+          </div>
+	<div class='busquedaPrincipal'>
+		<div style="background-color: rgb(41, 121, 255);" class="list list-inset">
+			<label class="item item-input">
+			<i class="icon ion-search placeholder-icon"></i>
+			<input type="text" placeholder="Que buscas?">
+			</label>
+			<!--
+			<label class="item item-input" style="margin-top: 15px;">
+			<i class="icon ion-search placeholder-icon"></i>
+			<input type="text" placeholder="Donde lo buscas?">
+			</label>
+			-->
+		</div>
+	</div>
+        </ion-header-bar>
+
+
+
+
+ <ion-tabs class="tabs-striped tabs-top tabs-icon-only tabsArreglo " delegate-handle="myhandle">
+        <ion-tab title="Busca">
+         <ion-content style='top: 221px; background-color: #eeeeee '>
+         	   	<div class='tabContainer'>
+                <div class="item" style="text-align: center; margin: 17px 10px; border-bottom: 3px solid #1565c0;"><a style="color:#1565c0 !important">Categorias populares</a></div>
+							   <div class='row favItems'>
+                      <div  class='col' >
+                        <div class='itemTS' >
+                        <a href="#/app/playlists/2">
+                        <img   src='img/hot.png'><br>
+                        <a>Hotel</a>
+                        </div>
+                        </a>
+                      </div>
+                        <div class='col'>
+                        <div class='itemTS'>
+                        <img src='img/res.png'><br>
+                        <a>Restaurante</a>
+                        </div>
+                      </div>
+                        <div class='col'>
+                        <div class='itemTS'>
+                        <img src='img/doc.png'><br>
+                        <a>Medico</a>
+                        </div>
+                      </div>
+                 </div>
+                  <div class='row favItems'>
+                      <div class='col'>
+                        <div class='itemTS'>
+                        <img src='img/cof.png'><br>
+                        <a>Cafe</a>
+                        </div>
+                      </div>
+                        <div class='col'>
+                        <div class='itemTS'>
+                        <img src='img/ele.png'><br>
+                        <a>Electricista</a>
+                        </div>
+                      </div>
+                        <div class='col'>
+                        <div class='itemTS'>
+                        <img src='img/tra.png'><br>
+                        <a>Transporte</a>
+                        </div>
+                      </div>
+                 </div>
+
+                  <div class="card" style="background-color: #1565c0 ;">
+
+                        <div class='item' style="text-align: center"><a style="color:#1565c0 !important">Favoritos <i class='ion-star'></i></a></div>
+                        <div class='item itemFAV' style="margin-top: 3px" ng-click="login()">
+                        <img src='img/logo3.png'>
+                        <div>
+                          <a>Olivia Pizza</a>
+                          <a>Calle Colmena</a>
+                          <a><i class='ion-star'></i><i class='ion-star'></i><i class='ion-star'></i><i class='ion-star'></i><i class='ion-star'></i></a>
+                        </div>
+
+                     
+                        </div>
+
+                 
+                        <div class='item itemFAV' >
+                        <img src='img/logo1.png'>
+                        <div>
+                          <a>Dr. Car</a>
+                          <a>Avenida 25</a>
+                          <a><i class='ion-star'></i><i class='ion-star'></i><i class='ion-star'></i><i class='ion-star'></i><i class='ion-star'></i></a>
+                        </div>
+                     
+                        </div>
+                     
+                     
+                        <div class='item itemFAV'>
+                        <img src='img/logo2.jpg'>
+                        <div>
+                          <a>Coffe House</a>
+                          <a>Las palmas</a>
+                          <a><i class='ion-star'></i><i class='ion-star'></i><i class='ion-star'></i><i class='ion-star'></i><i class='ion-star'></i></a>
+                        </div>
+                     
+                        </div>
+
+                   
+                  </div>
+                
+         	    </div>
+              <div style="height: 250px"></div>
+         </ion-content>
+
+        </ion-tab  >
+        <ion-tab title="Descubre">
+         <ion-content  style='top: 221px; background-color: #eeeeee '>
+         	   	<div class='tabContainer'>
+
+         	</div>
+         </ion-content>
+        </ion-tab>
+ </ion-tabs>
+
+
+</ion-view>

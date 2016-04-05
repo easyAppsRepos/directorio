@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<widget id          =     "com.ionicframework.headerExample"
+        version     =    "1.0.0"
+        xmlns       =    "http://www.w3.org/ns/widgets"
+        xmlns:gap   =    "http://phonegap.com/ns/1.0"
+        versionCode =   "1">
+  <name>Seekerline</name>
+  <description>
+        Seekerline
+    </description>
+  <author email="you@example.com" href="http://example.com.com/">
+      Your Name Here
+    </author>
+      <access origin="*"/>
+  <content src="index.html"/>
+
+  <preference name="phonegap-version" value="cli-5.2.0" />
+  <preference name="orientation" value="portrait" />
+   <preference name="permissions" value="none" />
+  <preference name="webviewbounce" value="false"/>
+  <preference name="UIWebViewBounce" value="false"/>
+  <preference name="DisallowOverscroll" value="true"/>
+  <preference name="android-minSdkVersion" value="16"/>
+  <preference name="BackupWebStorage" value="none"/>
+
+    <preference name="SplashScreen" value="splash" />
+    <preference name="splash-screen-duration" value="25000"/> 
+  <feature name="StatusBar">
+    <param name="ios-package" value="CDVStatusBar" onload="true"/>
+  </feature>
+
+<preference name="StatusBarOverlaysWebView" value="false" />
+<preference name="StatusBarStyle" value="lightcontent" />
+<preference name="StatusBarBackgroundColor" value="#448aff" />
+
+  <preference name="android-build-tool" value="gradle" />
+
+
+
+<gap:plugin name="cordova-plugin-camera" version="" source="npm" />
+
+<gap:plugin name="cordova-plugin-splashscreen" version="" source="npm" />
+<gap:plugin name="cordova-plugin-device" version="" source="npm" />
+<gap:plugin name="cordova-plugin-statusbar" version="" source="npm" />
+  <plugin name="ionic-plugin-keyboard" source="npm" />
+
+   <gap:plugin name="cordova-plugin-whitelist" version="1.0.0" source="npm" />
+  <gap:plugin name="cordova-plugin-network-information" source="npm" version="1.0.1" />
+</widget>

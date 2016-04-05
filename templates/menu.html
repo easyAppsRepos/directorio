@@ -1,0 +1,70 @@
+<ion-side-menus enable-menu-with-back-views="false">
+  <ion-side-menu-content>
+    <ion-nav-bar class="bar-positive">
+      <ion-nav-back-button>
+      </ion-nav-back-button>
+
+      <ion-nav-buttons side="left">
+        <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+        </button>
+      </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-nav-view name="menuContent"></ion-nav-view>
+  </ion-side-menu-content>
+
+     <ion-side-menu side="left" class="main-menu" expose-aside-when="large" >
+
+    <ion-content>
+      <ion-list >
+        <ion-item class="heading-item item item-avatar " nav-clear menu-close href="">
+          <div class="user-image-container">
+            <pre-img ratio="_1_1" helper-class="rounded-image">
+              <img class="user-image" ng-src="img/user1.jpg" spinner-on-load>
+            </pre-img>
+          </div>
+          <h2 class="greeting">Hola Maria</h2>
+          <p class="message">Bienvenida</p>
+        </ion-item>
+             <ion-item class="item-icon-left" nav-clear menu-close href='#/app/playlists'>
+          <i class="icon ion-home"></i>
+          <h2 class="menu-text">Dashboard</h2>
+        </ion-item>
+
+        <ion-item class="item-icon-left" nav-clear menu-close href='#/app/busqueda'>
+          <i class="icon ion-search"></i>
+          <h2 class="menu-text">Buscar</h2>
+        </ion-item>
+        <ion-item class="item-icon-left" nav-clear menu-close href='#/app/publicarComercio'>
+          <i class="icon ion-android-create"></i>
+          <h2 class="menu-text">Publicar Comercio</h2>
+        </ion-item>
+                <ion-item ng-controller='categoriasCtrl' class="item-icon-left accor" nav-clear href=''>
+   <ion-list  >
+        <div ng-repeat="group in groups">
+          <ion-item style='border: medium none !important;' class="item-stable"
+                    ng-click="toggleGroup(group)"
+                    ng-class="{active: isGroupShown(group)}" href=''>
+              <i class="icon" ng-class="isGroupShown(group) ? 'ion-minus' : 'ion-plus'"></i>
+            &nbsp;
+          <a style="color: white !important;padding-left: 44px;">  {{group.name}}</a>
+          </ion-item>
+          <ion-item class="item-accordion"
+                    ng-repeat="item in group.items"
+                    ng-show="isGroupShown(group)" href=''>
+            <a style="color: white !important;padding-left: 44px;"> {{item}}</a>
+          </ion-item>
+        </div>
+      </ion-list>
+
+        </ion-item>
+
+        <ion-item class="item-icon-left" nav-clear menu-close href='#/app/notificaciones' >
+          <i class="icon ion-android-notifications"></i>
+          <h2 class="menu-text">Notificaciones</h2>
+        </ion-item>
+
+
+    </ion-list>
+    </ion-content>
+  </ion-side-menu>
+</ion-side-menus>

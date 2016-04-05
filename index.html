@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title></title>
+
+
+
+    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet">
+    -->
+
+    <!-- ionic/angularjs js -->
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+
+    <!-- cordova script (this will be a 404 during development) -->
+    <script src="cordova.js"></script>
+
+    <!-- your app's js -->
+    <script src="js/app.js"></script>
+    <script src="js/controllers.js"></script>
+     <script src="js/services.js"></script>
+  </head>
+
+  <body ng-app="starter">
+    <ion-nav-view></ion-nav-view>
+
+            <script id="my-modal2.html" type="text/ng-template">
+        <ion-modal-view class="modalSelect">
+        <div class="ion-modal-content-custom">
+        <ion-content class="padding">
+  
+    <ion-list>
+      <ion-radio ng-model="choice" ng-click='setCategoria("Transporte");' ng-value="Transporte">Transporte</ion-radio>
+  <ion-radio ng-model="choice" ng-click='setCategoria("Hotel");' ng-value="Hotel">Hotel</ion-radio>
+  <ion-radio ng-model="choice" ng-click='setCategoria("Restaurante");' ng-value="Restaurante">Restaurante</ion-radio>
+    <ion-radio ng-model="choice" ng-click='setCategoria("Medico");' ng-value="Medico">Medico</ion-radio>
+  <ion-radio ng-model="choice" ng-value="Cafe" ng-click='setCategoria("Cafe");'>Cafe</ion-radio>
+    <ion-radio ng-model="choice" ng-click='setCategoria("Electricista");' ng-value="Electricista">Electricista</ion-radio>
+
+    
+</ion-list>
+        
+
+        </ion-content>
+        </div>
+        </ion-modal-view>
+        </script>
+
+
+            <script id="my-modal3.html" type="text/ng-template">
+        <ion-modal-view class="modalSelect">
+        <div class="ion-modal-content-custom">
+        <ion-content class="padding">
+  
+    <ion-list>
+  <ion-radio ng-model="choice" ng-click='setSubcategoria("SubCategoria1");' ng-value="SubCategoria1">SubCategoria 1</ion-radio>
+  <ion-radio ng-model="choice" ng-click='setSubcategoria("SubCategoria2");' ng-value="SubCategoria2">SubCategoria 2</ion-radio>
+    <ion-radio ng-model="choice" ng-click='setSubcategoria("SubCategoria3");' ng-value="SubCategoria3">SubCategoria 3</ion-radio>
+
+</ion-list>
+        
+
+        </ion-content>
+        </div>
+        </ion-modal-view>
+        </script>
+
+
+  </body>
+</html>
