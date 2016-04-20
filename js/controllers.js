@@ -119,7 +119,7 @@ Categorias.getCategorias().then(function(data){
 
 })
 
-.controller('publicarComercioCtrl', function($scope,$cordovaNetwork, $cordovaCamera, $cordovaFileTransfer, Ubicacion, $window,$ionicModal,Comercios, $rootScope, $timeout, $ionicLoading, $q, $ionicPopup) {
+.controller('publicarComercioCtrl', function($scope, $cordovaCamera, $cordovaFileTransfer, Ubicacion, $window,$ionicModal,Comercios, $rootScope, $timeout, $ionicLoading, $q, $ionicPopup) {
 $scope.propuesta={};
 $scope.paises=[];
 $scope.ciudades=[];
@@ -187,7 +187,7 @@ function onFail(message) {
 
 
     $scope.takePhoto = function () {
-   var isOnline = $cordovaNetwork.isOnline();
+   var isOnline = true;
    if(isOnline){
 $scope.btnTomarFoto = false;
     var options = {
