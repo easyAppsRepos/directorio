@@ -144,6 +144,8 @@ function clearCache() {
  
 var retries = 0;
 function onCapturePhoto(fileURI) {
+
+  console.log("En onCapturePhotoPP");
     var win = function (r) {
         clearCache();
         retries = 0;
@@ -189,7 +191,7 @@ function onFail(message) {
     $scope.takePhoto = function () {
    var isOnline = true;
    if(isOnline){
-$scope.btnTomarFoto = false;
+
     var options = {
       quality: 100,
       //destinationType: Camera.DestinationType.DATA_URL,
@@ -207,9 +209,11 @@ $scope.btnTomarFoto = false;
       //    $scope.imgURI = "data:image/jpeg;base64," + imageData;
       $scope.imgURI=imageData;
       onCapturePhoto(imageData);
+      console.log("idasidasdo");
 
       }, function (err) {
-             $scope.btnTomarFoto = true;
+              console.log("En error");
+                console.log(err);
        });
       } else{
                     $ionicPopup.alert({
