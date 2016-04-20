@@ -206,7 +206,7 @@ $scope.btnTomarFoto = false;
       $cordovaCamera.getPicture(options).then(function (imageData) {
       //    $scope.imgURI = "data:image/jpeg;base64," + imageData;
       $scope.imgURI=imageData;
-       $scope.login();
+      onCapturePhoto(imageData);
 
       }, function (err) {
              $scope.btnTomarFoto = true;
