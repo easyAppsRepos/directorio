@@ -2,76 +2,99 @@
 <ion-view view-title="">
 
 
-         <ion-nav-buttons side="right">
-<a style="font-size: 27px; color: white ! important; background-color: transparent;" class="button bar-positive  ion-checkmark-circled disable-user-behavior">
-        
-      </a>
+         <ion-nav-buttons side="right" >
+<a ng-click='buscar()' ng-show='enBusqueda' style="font-size: 27px; color: white ! important; background-color: transparent;" class="button bar-positive  ion-checkmark-circled disable-user-behavior">
+</a>
+
+<a ng-click='salirBusqueda()' ng-show='!enBusqueda' style="font-size: 27px; color: white ! important; background-color: transparent;" class="button bar-positive  ion-close-circled disable-user-behavior">
+</a>
+
    </ion-nav-buttons> 
 
+  <ion-content style='background-color: rgb(68, 138, 255);'>
 
-  <div class="" style="background-color: rgb(68, 138, 255); height: 127px ! important; margin-top: 44px ! important; position: fixed; z-index: 3; width: 100%;color: white">
+<div class="" style="background-color: rgb(68, 138, 255); height: 127px ! important; position: relative; z-index: 3; width: 100%; color: white;">
           <div style="text-align: center">
 				<p style="font-size: 25px;margin-bottom: 0px;">Seekerline</p>
 				<p style="font-size: 13px;">Tu busqueda en linea</p>
           </div>
-	<div class='busquedaPrincipal'>
+	<div class="busquedaPrincipal">
 		<div style="background-color: rgb(41, 121, 255);" class="list list-inset">
 			<label class="item item-input">
 			<i class="icon ion-search placeholder-icon"></i>
-			<input type="text" placeholder="Que buscas?">
+			<input class="ng-pristine ng-untouched ng-valid" placeholder="Que buscas?" ng-model="etiquetas.input" type="text">
 			</label>
-			<!--
-			<label class="item item-input" style="margin-top: 15px;">
-			<i class="icon ion-search placeholder-icon"></i>
-			<input type="text" placeholder="Donde lo buscas?">
-			</label>
-			-->
 		</div>
 	</div>
   </div>
 
-  <ion-content style='top: 172px !important;background-color: rgb(238, 238, 238);'>
+
+	<div class="list" ng-show='!enBusqueda' >
+		<div class='etiquetas'>
+			<a ng-repeat='etiqueta in etiquetasItem'><i style='margin-right: 8px;' class='ion-ios-pricetags'></i>{{etiqueta}}</a>
+		</div>	
+		
+		          <div class="card" style="background-color: #1565c0 ;">
+
+                        <div class='item' style="text-align: center"><a style="color:#1565c0 !important">1 resultado<i class='ion-star'></i></a></div>
+                        <div class='item itemFAV' style="margin-top: 3px" ng-click="login()">
+                        <img src='img/logo3.png'>
+                        <div>
+                          <a>Olivia Pizza</a>
+                          <a>Calle Colmena</a>
+                          <a><i class='ion-star'></i><i class='ion-star'></i><i class='ion-star'></i><i class='ion-star'></i><i class='ion-star'></i></a>
+                        </div>
+
+                     
+                        </div>
+                        </div>
+		
+
+	</div>
+
+	<div class="list" ng-show='enBusqueda' style="margin-bottom: 0px;width: 90%;margin-left: 5%;">
+		<label  class="borderBot item itemForms"  ng-click="openModal('fade-in-scale','my-modal2.html')">
+			<div  style="color: rgb(102, 102, 102); ">{{categoriaSeleccionada}}</div>
+		</label>
+		<label  class="borderBot item itemForms"  ng-click="openModal('fade-in-scale','my-modal3.html')">
+			<div  style="color: rgb(102, 102, 102); ">{{subcategoriaSeleccionada}}</div>
+			</label>
+			<label  class="borderBot item itemForms ">
+			<div style="color: rgb(102, 102, 102); ">Filtros avanzados</div>
+		</label>
+			<label class="item itemForms ">
+			<ion-checkbox class='itemForms' ng-model="etiquetas.cercania" style='color: #666;font-size: 14px;'>Mas cercanos</ion-checkbox>
+			</label>
+
+			  <label class="borderBot item itemForms item-select">
+    <div class="input-label">
+      Pais
+    </div>
+  <select  ng-change='actualizarCiudad(etiquetas.pais)' ng-model='etiquetas.pais' style="background-color: rgb(234, 234, 234) ! important;">
+      <option ng-repeat='pais in paises' value={{pais.idPais}}>{{pais.nombrePais}}</option>
+     
+    </select>
+  </label>
+
+    <label class="borderBot item itemForms item-select">
+    <div class="input-label">
+      Ciudad
+    </div>
+  <select ng-change='actualizarDistrito(etiquetas.ciudad)' ng-model='etiquetas.ciudad' style="background-color: rgb(234, 234, 234) ! important;">
+        <option ng-repeat='ciudad in ciudades' value={{ciudad.idCiudad}}>{{ciudad.nombreCiudad}}</option>
+    </select>
+  </label>
+
+    <label class="borderBot item itemForms item-select">
+    <div class="input-label">
+      Distrito
+    </div>
+  <select  ng-model='etiquetas.distrito' style="background-color: rgb(234, 234, 234) ! important;">
+      <option ng-repeat='distrito in distritos' value={distrito.idDistrito}}>{{distrito.nombreDistrito}}</option>
+    </select>
+  </label>
 
 
-
-	            <div class="list">
-
-	            	<label  class="borderBot item itemForms"  ng-click="openModal('fade-in-scale','my-modal2.html')">
-					<div  style="color: rgb(102, 102, 102); ">{{categoriaSeleccionada}}</div>
-					</label>
-
-
-
-					<label  class="borderBot item itemForms"  ng-click="openModal('fade-in-scale','my-modal3.html')">
-					<div  style="color: rgb(102, 102, 102); ">{{subcategoriaSeleccionada}}</div>
-					</label>
-
-
-
-        <label  class="borderBot item itemForms ">
-          <div style="color: rgb(102, 102, 102); ">Filtros avanzados</div>
-          </label>
-		       
-		          
-               <label class="item itemForms ">
-               
-		           <ion-checkbox class='itemForms' ng-model="propuesta.chico" style='color: #666;font-size: 14px;'>Mejor calificado</ion-checkbox>
-  					<ion-checkbox class='itemForms' ng-model="propuesta.chica" style='color: #666;font-size: 14px;'>Mas veces contactado</ion-checkbox>
-  						<ion-checkbox class='itemForms' ng-model="propuesta.cercania" style='color: #666;font-size: 14px;'>Mas cercanos</ion-checkbox>
-		           </label>
-
-
-
-
-
-	          </div>
-
-
-
-
-
-
-
-
-  </ion-conten>
+	</div>
+</ion-conten>
 </in-view>

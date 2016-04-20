@@ -16,14 +16,14 @@
 
     <ion-content>
       <ion-list >
-        <ion-item class="heading-item item item-avatar " nav-clear menu-close href="">
+        <ion-item ng-controller='PlaylistsCtrl'class="heading-item item item-avatar " nav-clear menu-close href="">
           <div class="user-image-container">
             <pre-img ratio="_1_1" helper-class="rounded-image">
-              <img class="user-image" ng-src="img/user1.jpg" spinner-on-load>
+              <img class="user-image" ng-src="img/user.png" spinner-on-load>
             </pre-img>
           </div>
-          <h2 class="greeting">Hola Maria</h2>
-          <p class="message">Bienvenida</p>
+          <h2 class="greeting">Hola {{nombreUser}}</h2>
+          <p class="message">Bienvenido</p>
         </ion-item>
              <ion-item class="item-icon-left" nav-clear menu-close href='#/app/playlists'>
           <i class="icon ion-home"></i>
@@ -49,19 +49,30 @@
           <a style="color: white !important;padding-left: 44px;">  {{group.name}}</a>
           </ion-item>
           <ion-item class="item-accordion"
+          menu-close
+           ng-click='goCategoria(item.id)'
+           href=''
                     ng-repeat="item in group.items"
-                    ng-show="isGroupShown(group)" href=''>
-            <a style="color: white !important;padding-left: 44px;"> {{item}}</a>
+                    ng-show="isGroupShown(group)">
+            <a   style="color: white !important;padding-left: 44px;"> {{item.nombre}}</a>
           </ion-item>
         </div>
       </ion-list>
 
         </ion-item>
 
-        <ion-item class="item-icon-left" nav-clear menu-close href='#/app/notificaciones' >
+   
+
+             <ion-item class="item-icon-left" nav-clear menu-close href='#/app/notificaciones' >
           <i class="icon ion-android-notifications"></i>
           <h2 class="menu-text">Notificaciones</h2>
         </ion-item>
+
+             <ion-item ng-controller='loginPageCtrl' ng-click='cerrar()' class="item-icon-left" nav-clear menu-close href='#/loginPage' >
+          <i class="icon ion-log-out"></i>
+          <h2 class="menu-text">Cerrar sesion</h2>
+        </ion-item>
+
 
 
     </ion-list>

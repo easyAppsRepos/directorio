@@ -59,6 +59,24 @@ angular.module('starter', ['ionic', 'starter.controllers'])
       }
     })
 
+     .state('registro', {
+      url: '/registro',
+
+          templateUrl: 'templates/registro.html',
+          controller: 'loginPageCtrl'
+        
+      })
+
+
+        .state('loginPage', {
+      url: '/loginPage',
+
+          templateUrl: 'templates/loginPage.html',
+          controller: 'loginPageCtrl'
+        
+      })
+
+
         .state('app.busqueda', {
       url: '/busqueda',
       views: {
@@ -123,5 +141,22 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     }
   });
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/playlists');
+ // $urlRouterProvider.otherwise('/app/playlists');
+  console.log(localStorage.getItem('seekUserId'));
+  if(localStorage.getItem('seekUserId') == null || localStorage.getItem('seekUserId') == 'undefined' || localStorage.getItem('seekUserId') == undefined){
+
+$urlRouterProvider.otherwise('/loginPage');
+
+}
+else{
+  
+      $urlRouterProvider.otherwise("/app/playlists");
+  // $urlRouterProvider.otherwise("/login");
+
+
+}
+
+
+
+
 });

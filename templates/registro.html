@@ -1,0 +1,41 @@
+ <ion-nav-view view-title="Register" >
+<a href='#/loginPage' style="z-index: 4; height: 50px; width: 50px; position: absolute; font-size: 40px; color: rgb(56, 126, 245) !important; margin-left: 20px; margin-top: 8px; top: 0px; left: 0px;"><i  class="icon ion-android-arrow-back"></i></a>
+  <ion-content style='background-color: rgb(234, 234, 234) !important;'>
+
+
+  <div style="text-align: center; color: rgb(56, 126, 245); margin-top: 40px;">
+        <p style="font-size: 25px;margin-bottom: 0px;">Registro</p>
+        
+          </div>
+
+          <label style='margin-top: 15px' class="borderBot item itemForms "  >
+          <div style="color: rgb(102, 102, 102); ">Nombre</div>
+          </label>
+          <label class="item item-input " style="margin-top: 5px;">
+            <input ng-model='registro.nombre' type="text" placeholder="Maria">
+          </label>
+
+
+           <label style='margin-top: 15px' class="borderBot item itemForms "  >
+          <div style="color: rgb(102, 102, 102); ">Correo electronico</div>
+          </label>
+          <label class="item item-input " style="margin-top: 5px;">
+            <input ng-model='registro.correo' type="text" placeholder="micorreo@email.com">
+          </label>
+
+            <label  class="borderBot item itemForms "  >
+          <div style="color: rgb(102, 102, 102); ">Contrasena</div>
+          </label>
+          <label class="item item-input " style="margin-top: 5px;">
+            <input ng-model='registro.pass1' type="text" placeholder="contrasena">
+          </label>
+                    <label class="item item-input " style="margin-top: 5px;">
+            <input ng-model='registro.pass2' type="text" placeholder="repetir contrasena">
+          </label>
+
+          <button ng-click='registrarUsuario(registro)'style='margin-top:20px;background-color: #387ef5;color: #fff;' class="button button-block button-positive">Registrar</button>
+            
+
+
+  </ion-content>
+</ion-nav-view>

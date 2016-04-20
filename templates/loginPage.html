@@ -1,0 +1,70 @@
+<ion-nav-view>
+      <ion-content>
+ <!--             
+<button style='  margin-top: 200px; border-color: #2d5073;
+    background-color: #3b5998;
+    background-image: url(http://icons.iconarchive.com/icons/danleech/simple/512/facebook-icon.png);' ng-click='loginFacebook()'>LOGIN CON FACEBOOK</button>
+
+           <div class="list text-center padding">
+          
+                 <div style="text-align:center;">
+                  <img src="img/logo.jpg" width="100%" height="auto">
+                </div>
+          </div>-->
+                  <div style="text-align: center; color: rgb(56, 126, 245); margin-top: 40px;">
+        <p style="font-size: 25px;margin-bottom: 0px;">Seekerline</p>
+        <p style="font-size: 13px;">Tu busqueda en linea</p>
+          </div>
+
+          <form novalidate class='loginForm' name="loginForm" ng-submit="loginForm.$valid && signIn(user)">
+          <div class="list">
+            <label class="itemLogin item item-input item-floating-label" ng-class="{ 'has-error' : loginForm.txtemail.$invalid && loginForm.$submitted }" style="border: 1px solid gray;">
+             <i class="iconLogin icon ion-person placeholder-icon"></i>
+              <span class="input-label">Email</span>
+              <input name="txtemail" type="email" ng-model="user.email" placeholder="Email"
+              ng-minlength="5"
+              ng-maxlength="30"
+              required>
+            </label>
+            <!-- Edit this messages if you want -->
+            <div class="form-errors" ng-messages="loginForm.txtemail.$error" ng-if="loginForm.$submitted">
+              <div class="form-error" ng-message="required">Este campo es requerido</div>
+              <div class="form-error" ng-message="email">Este espacio debe ser un email</div>
+              <div class="form-error" ng-message="minlength">Al menos debe ser de 5 caracteres</div>
+              <div class="form-error" ng-message="maxlength">Debe ser menor a 30 carateres</div>
+            </div>
+            <label class="itemLogin item item-input item-floating-label" ng-class="{ 'has-error-lr' : loginForm.txtPassword.$invalid && loginForm.$submitted }" style="border: 1px solid gray;">
+               <i class="iconLogin icon ion-locked placeholder-icon"></i>
+              <span class="input-label">Contrasena</span>
+
+              <input name="txtPassword" type="password" ng-model="user.password" placeholder="Password"
+              ng-minlength="5"
+              ng-maxlength="30"
+              required>
+            </label>
+            <!-- Edit this messages if you want -->
+            <div class="form-err  ors" ng-messages="loginForm.txtPassword.$error" ng-if="loginForm.$submitted">
+            <div class="form-error" ng-message="required">Este campo es requerido</div>
+            <div class="form-error" ng-message="minlength">Al menos debe ser de 5 caracteres.</div>
+            <div class="form-error" ng-message="maxlength">Debe ser menor a 30 caracteres</div>
+            </div>
+          </div>
+           <div class="padding-top">
+    
+            <input style='background-color: #387ef5;color: #fff;'type="submit" class="button button-block button-positive" value="Acceso">
+            <!--
+              <div  ng-click='loginFace()'class=" faceBtn button button-block button-positive"><p style="font-size: 16px;margin-top: 8px;">Login con Facebook</p></div>
+              -->
+           <p class="text-center padding-top">
+           <!--
+                <a style='color:#666 !important' ng-click='forgot()' class="button button-clear button-positive">Olvido?</a>
+                -->
+
+                <a style='color:#666 !important' href='#/registro' transitiontype="fade" go-native class="button button-clear button-positive">Registrarse</a>
+
+          </div>
+
+   
+        </form>    
+      </ion-content>
+      </ion-nav-view>

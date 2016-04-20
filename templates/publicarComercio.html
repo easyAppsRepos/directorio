@@ -3,7 +3,7 @@
 
 
          <ion-nav-buttons side="right">
-<a style="font-size: 27px; color: white ! important; background-color: transparent;" class="button bar-positive  ion-checkmark-circled disable-user-behavior">
+<a ng-click='addComercio()' style="font-size: 27px; color: white ! important; background-color: transparent;" class="button bar-positive  ion-checkmark-circled disable-user-behavior">
         
       </a>
    </ion-nav-buttons> 
@@ -24,24 +24,45 @@
               <div class="list">
 
         <label  class="borderBot item itemForms ">
-          <div style="color: rgb(102, 102, 102); ">Tipo de negocio</div>
+          <div style="color: rgb(102, 102, 102); ">Tipo de negocio y/o Actividad</div>
           </label>
            
               
                <label class="item itemForms ">
                
-               <ion-checkbox class='itemForms' ng-model="propuesta.chico" style='color: #666;font-size: 14px;'>Empresa</ion-checkbox>
-            <ion-checkbox class='itemForms' ng-model="propuesta.chica" style='color: #666;font-size: 14px;'>Particular</ion-checkbox>
+               <ion-checkbox ng-click='cambTipo(0)' ng-checked='tipoE' class='itemForms' style='color: #666;font-size: 14px;'>Empresa</ion-checkbox>
+            <ion-checkbox   ng-click='cambTipo(1)'  ng-checked='tipoP' class='itemForms' style='color: #666;font-size: 14px;'>Particular</ion-checkbox>
                </label>
 
 
 
            <label  class="borderBot item itemForms "  >
-          <div style="color: rgb(102, 102, 102); ">Nombre</div>
+          <div style="color: rgb(102, 102, 102); ">{{labelNombre}}</div>
           </label>
               <label class="item item-input " style="margin-top: 5px;">
-                <input ng-model='propuesta.precio' type="text" placeholder="Nombre del negocio">
+                <input ng-model='propuesta.nombreComercio' type="text" placeholder="{{labelNombre}}">
               </label>
+
+  <label class="borderBot item itemForms item-select">
+    <div class="input-label">
+      Tipo de identificacion
+    </div>
+  <select ng-model='propuesta.idTipoIdentificacion' style="background-color: rgb(234, 234, 234) ! important;">
+      <option value="0">CC</option>
+      <option value="1" selected="">NIT</option>
+      <option value="2">DNI</option>
+    </select>
+  </label>
+
+
+           <label  class="borderBot item itemForms "  >
+          <div style="color: rgb(102, 102, 102); ">Identificacion</div>
+          </label>
+              <label class="item item-input " style="margin-top: 5px;">
+                <input ng-model='propuesta.identificacionComercio' type="text" placeholder="Identificacion">
+              </label>
+
+
 
                       <label  ng-controller='BusquedaCtrl' class="borderBot item itemForms"  ng-click="openModal('fade-in-scale','my-modal2.html')">
           <div  style="color: rgb(102, 102, 102); ">{{categoriaSeleccionada}}</div>
@@ -56,11 +77,11 @@
 
 
            <label  class="borderBot item itemForms ">
-          <div style="color: rgb(102, 102, 102); ">Descripcion</div>
+          <div style="color: rgb(102, 102, 102); ">Describe tu negocio o actividad</div>
           </label>
               <label
                 <label class="item " style="margin-top: 6px;">
-                 <textarea ng-model='propuesta.descripcion' style="width: 100%; height: 100px;" placeholder="Describe tu negocio" maxlength="150"></textarea>
+                 <textarea ng-model='propuesta.descripcionNegocio' style="width: 100%; height: 100px;" placeholder="Describe tu negocio" maxlength="150"></textarea>
                  </label>
 
 
@@ -70,17 +91,55 @@
           <div style="color: rgb(102, 102, 102); ">Numero de contacto</div>
           </label>
               <label class="item item-input " style="margin-top: 5px;">
-                <input ng-model='propuesta.precio' type="text" placeholder="Numero para contactar">
+                <input ng-model='propuesta.numeroContacto' type="text" placeholder="Numero para contactar">
               </label>
 
+      <label  class="borderBot item itemForms " >
+          <div style="color: rgb(102, 102, 102); ">Correo electronico</div>
+          </label>
+              <label class="item item-input " style="margin-top: 5px;">
+                <input ng-model='propuesta.correoElectronico' type="text" placeholder="mipagina@info.com">
+              </label>
 
 
            <label  class="borderBot item itemForms " >
           <div style="color: rgb(102, 102, 102); ">Pagina web</div>
           </label>
               <label class="item item-input " style="margin-top: 5px;">
-                <input ng-model='propuesta.precio' type="text" placeholder="www.mipagina.com">
+                <input ng-model='propuesta.pagWeb' type="text" placeholder="www.mipagina.com">
               </label>
+
+  <label class="borderBot item itemForms item-select">
+    <div class="input-label">
+      Pais
+    </div>
+  <select  ng-change='actualizarCiudad(propuesta.idPais)' ng-model='propuesta.idPais' style="background-color: rgb(234, 234, 234) ! important;">
+      <option ng-repeat='pais in paises' value={{pais.idPais}}>{{pais.nombrePais}}</option>
+     
+    </select>
+  </label>
+    <label class="borderBot item itemForms item-select">
+    <div class="input-label">
+      Ciudad
+    </div>
+
+      <select  ng-change='actualizarDistrito(propuesta.idCiudad)' ng-model='propuesta.idCiudad'  style="background-color: rgb(234, 234, 234) ! important;">
+        <option ng-repeat='ciudad in ciudades' value={{ciudad.idCiudad}}>{{ciudad.nombreCiudad}}</option>
+    </select>
+
+  </label>
+
+    <label class="borderBot item itemForms item-select">
+    <div class="input-label">
+      Distrito
+    </div>
+
+      <select  ng-model='propuesta.idDistrito'  style="background-color: rgb(234, 234, 234) ! important;">
+        <option ng-repeat='distrito in distritos' value={{distrito.idDistrito}}>{{distrito.nombreDistrito}}</option>
+    </select>
+  </label>
+
+              <label style="font-size: 11px; background-color: rgb(234, 234, 234); border: medium none;" ng-model="filter.blue" class="item item-checkbox ng-valid"><div class="checkbox checkbox-input-hidden disable-pointer-events checkbox-circle"><input value="on" style="" class="ng-untouched ng-valid ng-dirty ng-valid-parse" ng-model="filter.blue" type="checkbox"><i class="checkbox-icon"></i></div><div class="item-content disable-pointer-events" ><span>Acepto los terminos y condiciones</span></div></label>
 
 
 

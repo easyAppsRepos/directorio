@@ -36,83 +36,33 @@
          <ion-content style='top: 221px; background-color: #eeeeee '>
          	   	<div class='tabContainer'>
                 <div class="item" style="text-align: center; margin: 17px 10px; border-bottom: 3px solid #1565c0;"><a style="color:#1565c0 !important">Categorias populares</a></div>
-							   <div class='row favItems'>
-                      <div  class='col' >
+							   <div class='rowFav favItems'>
+
+                      <div ng-repeat='pop in pops'  class='colFav' >
                         <div class='itemTS' >
-                        <a href="#/app/playlists/2">
-                        <img   src='img/hot.png'><br>
-                        <a>Hotel</a>
+                        <a href="#/app/playlists/{{pop.idCategoria}}">
+                        <img   src='{{pop.iconoCat}}'><br>
+                        <a>{{pop.nombreCategoria}}</a>
                         </div>
                         </a>
                       </div>
-                        <div class='col'>
-                        <div class='itemTS'>
-                        <img src='img/res.png'><br>
-                        <a>Restaurante</a>
-                        </div>
-                      </div>
-                        <div class='col'>
-                        <div class='itemTS'>
-                        <img src='img/doc.png'><br>
-                        <a>Medico</a>
-                        </div>
-                      </div>
+                 
                  </div>
-                  <div class='row favItems'>
-                      <div class='col'>
-                        <div class='itemTS'>
-                        <img src='img/cof.png'><br>
-                        <a>Cafe</a>
-                        </div>
-                      </div>
-                        <div class='col'>
-                        <div class='itemTS'>
-                        <img src='img/ele.png'><br>
-                        <a>Electricista</a>
-                        </div>
-                      </div>
-                        <div class='col'>
-                        <div class='itemTS'>
-                        <img src='img/tra.png'><br>
-                        <a>Transporte</a>
-                        </div>
-                      </div>
-                 </div>
+                  
+  
 
                   <div class="card" style="background-color: #1565c0 ;">
 
                         <div class='item' style="text-align: center"><a style="color:#1565c0 !important">Favoritos <i class='ion-star'></i></a></div>
-                        <div class='item itemFAV' style="margin-top: 3px" ng-click="login()">
-                        <img src='img/logo3.png'>
-                        <div>
-                          <a>Olivia Pizza</a>
+                    
+
+                        <div class='item itemFAV' ng-click="login()" ng-repeat='comercio in favs'>
+                      <img src='img/logo3.png'>
+                      <div>
+                          <a>{{comercio.nombreComercio}}</a>
                           <a>Calle Colmena</a>
                           <a><i class='ion-star'></i><i class='ion-star'></i><i class='ion-star'></i><i class='ion-star'></i><i class='ion-star'></i></a>
                         </div>
-
-                     
-                        </div>
-
-                 
-                        <div class='item itemFAV' >
-                        <img src='img/logo1.png'>
-                        <div>
-                          <a>Dr. Car</a>
-                          <a>Avenida 25</a>
-                          <a><i class='ion-star'></i><i class='ion-star'></i><i class='ion-star'></i><i class='ion-star'></i><i class='ion-star'></i></a>
-                        </div>
-                     
-                        </div>
-                     
-                     
-                        <div class='item itemFAV'>
-                        <img src='img/logo2.jpg'>
-                        <div>
-                          <a>Coffe House</a>
-                          <a>Las palmas</a>
-                          <a><i class='ion-star'></i><i class='ion-star'></i><i class='ion-star'></i><i class='ion-star'></i><i class='ion-star'></i></a>
-                        </div>
-                     
                         </div>
 
                    
