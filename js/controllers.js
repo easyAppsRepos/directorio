@@ -143,13 +143,14 @@ function clearCache() {
 }
  
 var retries = 0;
-function onCapturePhoto(fileURI) {
+function onCapturePhoto(fileURI,name) {
 
   console.log("En onCapturePhotoPP");
     var win = function (r) {
         clearCache();
         retries = 0;
-        alert('Done!');
+
+          $ionicLoading.hide();
     }
  
     var fail = function (error) {
@@ -161,13 +162,13 @@ function onCapturePhoto(fileURI) {
         } else {
             retries = 0;
             clearCache();
-            alert('Ups. Something wrong happens!');
+              $ionicLoading.hide();
         }
     }
  
     var options = new FileUploadOptions();
     options.fileKey = "file";
-    options.fileName = fileURI.substr(fileURI.lastIndexOf('/') + 1);
+    options.fileName = 'logo_'+name;
     options.mimeType = "image/jpeg";
     options.params = {}; // if we need to send parameters to the server request
     var ft = new FileTransfer();
@@ -200,15 +201,15 @@ function onFail(message) {
  sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
       allowEdit: false,
       encodingType: Camera.EncodingType.JPEG,
-      targetWidth:  100,
-      targetHeight: 100,
+      targetWidth:  200,
+      targetHeight: 200,
       popoverOptions: CameraPopoverOptions
   };
 
       $cordovaCamera.getPicture(options).then(function (imageData) {
       //    $scope.imgURI = "data:image/jpeg;base64," + imageData;
       $scope.imgURI=imageData;
-      onCapturePhoto(imageData);
+
       console.log("idasidasdo");
 
       }, function (err) {
@@ -277,6 +278,10 @@ if(typeof $scope.propuesta.descripcionNegocio=='undefined'){
   return true;
 }
 
+    $ionicLoading.show({
+      template: 'Cargando...'
+    });
+
 console.log( Object.keys($scope.propuesta).length);
 var comercio={};
 
@@ -303,7 +308,13 @@ comercio.idTipoIdentificacion=0;
 
 console.log(comercio);
 Comercios.publicarComercio(comercio).then(function(data){
-  console.log($scope.subCategorias);
+  console.log(data);
+if(data.status==200){
+onCapturePhoto($scope.imgURI,data.data);
+}
+else{
+  $ionicLoading.hide();
+}
 });
 
 
@@ -683,15 +694,18 @@ return {
       return  $http.post('http://www.seek-busines-services.com/API/guardarComercio.php',comercio)
                     .then(function(response) {
                         if (typeof response.data === 'object') {
-                          console.log(response.data);
+                          console.log(response);
+
                             return response.data;
                         } else {
                             // invalid response
-                            return $q.reject(response.data);
+                                   // console.log(response);
+                            return response;
                         }
 
                     }, function(response) {
                         // something went wrong
+                                console.log(response);
                         return $q.reject(response.data);
                     });
     }
