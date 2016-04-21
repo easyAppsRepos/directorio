@@ -57,7 +57,7 @@ $scope.addFav= function(idComercioP){
   if($scope.favAct=='noFav'){
               $scope.favAct='fav';
           $scope.labelFav='Favorito';
-          
+
     console.log('agregaraFAv');
 var userId=localStorage.getItem('seekUserId');
 console.log(idComercioP)
@@ -206,6 +206,10 @@ function onCapturePhoto(fileURI,name) {
         retries = 0;
 
           $ionicLoading.hide();
+          $scope.propuesta={};
+          alert("Comercio ingresado correctamente");
+          $state.go('app.playlists');
+
     }
  
     var fail = function (error) {
@@ -218,6 +222,7 @@ function onCapturePhoto(fileURI,name) {
             retries = 0;
             clearCache();
               $ionicLoading.hide();
+                alert("Ha ocurrido un error");
         }
     }
  
@@ -321,6 +326,13 @@ $rootScope.$on('propuestaCategoria', function(event, args) {
 
 $scope.addComercio=function(){
 
+
+if(typeof $scope.imgURI=='undefined'){
+
+  alert("Debes elegir un logo");
+  return true;
+}
+
 if(typeof $scope.propuesta.nombreComercio=='undefined'){
 
   alert("Debes especificar un nombre");
@@ -373,10 +385,12 @@ console.log(comercio);
 Comercios.publicarComercio(comercio).then(function(data){
   console.log(data);
 if(data.status==200){
+
 onCapturePhoto($scope.imgURI,data.data);
 }
 else{
   $ionicLoading.hide();
+  alert("Ha ocurrido un error");
 }
 });
 
