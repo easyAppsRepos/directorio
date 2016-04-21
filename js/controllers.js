@@ -55,13 +55,15 @@ $scope.correoElectronico='No especificado';
 $scope.addFav= function(idComercioP){
 
   if($scope.favAct=='noFav'){
+              $scope.favAct='fav';
+          $scope.labelFav='Favorito';
+          
     console.log('agregaraFAv');
 var userId=localStorage.getItem('seekUserId');
 console.log(idComercioP)
 console.log(userId);
 Categorias.agregarFav(idComercioP,userId).then(function(data){
-          $scope.favAct='fav';
-          $scope.labelFav='Favorito';
+
   console.log(data);
 
 });
