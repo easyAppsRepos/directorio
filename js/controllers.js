@@ -174,7 +174,7 @@ Categorias.getCategorias().then(function(data){
 
 })
 
-.controller('publicarComercioCtrl', function($scope, $cordovaCamera, $cordovaFileTransfer, Ubicacion, $window,$ionicModal,Comercios, $rootScope, $timeout, $ionicLoading, $q, $ionicPopup) {
+.controller('publicarComercioCtrl', function($scope, $cordovaCamera, $cordovaFileTransfer, Ubicacion, $window,$ionicModal,Comercios, $rootScope, $timeout, $ionicLoading, $q, $ionicPopup,$state) {
 $scope.propuesta={};
 $scope.paises=[];
 $scope.ciudades=[];
