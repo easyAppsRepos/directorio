@@ -1,7 +1,11 @@
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout) {
-
+.controller('AppCtrl', function($scope, $ionicModal, $timeout,Comercios,Categorias) {
+$scope.comercioDetalle={};
+$scope.favAct='noFav';
+   $scope.labelFav='Agregar a Favoritos';
+$scope.numeroContacto='No especificado';
+$scope.correoElectronico='No especificado';
 
   $scope.loginData = {};
 
@@ -17,9 +21,54 @@ angular.module('starter.controllers', [])
     $scope.modal.hide();
   };
 
-  $scope.login = function() {
-    $scope.modal.show();
+
+  $scope.login = function(idComercio) {
+
+    Comercios.detalleComercio(idComercio,localStorage.getItem('seekUserId')).then(function(data){
+
+     $scope.comercioDetalle=data[0];
+     if(typeof data[0].numeroContacto !== 'undefined' && data[0].numeroContacto!==''){
+          $scope.numeroContacto=data[0].numeroContacto;
+        }
+     if(typeof data[0].correoElectronico !== 'undefined' && data[0].correoElectronico!==''){
+          $scope.correoElectronico=data[0].correoElectronico;
+        }
+
+        if(typeof data[0].fav !== 'undefined' && data[0].fav > 0){
+          $scope.favAct='fav';
+          $scope.labelFav='Favorito';
+        }
+        else{  
+          $scope.favAct='noFav';
+          $scope.labelFav='Agregar a Favoritos';
+        }
+   $scope.modal.show();
+    console.log(data);
+
+
+});
+
+  
+
   };
+
+$scope.addFav= function(idComercioP){
+
+  if($scope.favAct=='noFav'){
+    console.log('agregaraFAv');
+var userId=localStorage.getItem('seekUserId');
+console.log(idComercioP)
+console.log(userId);
+Categorias.agregarFav(idComercioP,userId).then(function(data){
+  console.log(data);
+});
+
+  }
+  else{
+    console.log('do nothing');
+  }
+
+}
 
   $scope.doLogin = function() {
     console.log('Doing login', $scope.loginData);
@@ -58,14 +107,15 @@ angular.module('starter.controllers', [])
     face: 'img/mike.png'
   }];
 
-
+  $scope.catIdF=$stateParams.catId;
 
 Categorias.getSubCategoria($stateParams.catId).then(function(data){
+
   $scope.subCats=data;
   console.log(data);
 });
 
-$scope.cat = cats[2];
+//$scope.cat = cats[$stateParams.catId];
 
 
 })
@@ -278,6 +328,14 @@ if(typeof $scope.propuesta.descripcionNegocio=='undefined'){
   return true;
 }
 
+if(typeof $scope.propuesta.idCiudad=='undefined'){
+
+  alert("Debes especificar una ciudad");
+  return true;
+}
+
+
+
     $ionicLoading.show({
       template: 'Cargando...'
     });
@@ -356,6 +414,7 @@ $scope.labelNombre='Nombre de la empresa';
 $scope.etiquetas={};
 $scope.etiquetasItem=[];
 $scope.enBusqueda=true;
+  $scope.resultadosBusqueda=[];
 
  $scope.modalClasses = ['slide-in-up', 'slide-in-down', 'fade-in-scale', 'fade-in-right', 'fade-in-left', 'newspaper', 'jelly', 'road-runner', 'splat', 'spin', 'swoosh', 'fold-unfold'];
 
@@ -477,6 +536,7 @@ paramsBusqueda.distrito=$scope.etiquetas.distrito;
 }
 
 Busqueda.buscarComercio(paramsBusqueda).then(function(data){
+  $scope.resultadosBusqueda=data;
 console.log(data);
 })
 
@@ -708,6 +768,25 @@ return {
                                 console.log(response);
                         return $q.reject(response.data);
                     });
+    },
+        detalleComercio: function(comercio,idY) {
+      return  $http.post('http://www.seek-busines-services.com/API/detalleComercio.php',{idCategoria:comercio, idUsuario:idY})
+                    .then(function(response) {
+                        if (typeof response.data === 'object') {
+                          console.log(response);
+
+                            return response.data;
+                        } else {
+                            // invalid response
+                                   // console.log(response);
+                            return response;
+                        }
+
+                    }, function(response) {
+                        // something went wrong
+                                console.log(response);
+                        return $q.reject(response.data);
+                    });
     }
   }
 })
@@ -723,7 +802,14 @@ return {
     },
 
  getComercio:function(idSub){
-      return  $http.post('http://www.seek-busines-services.com/API/getComercios.php',{idSubCategoria:idSub})
+var paramC={};
+  if(idSub<0){
+paramC.idCategoria=parseInt(idSub)*-1;
+  }
+  else{
+paramC.idSubCategoria=idSub;
+  }
+      return  $http.post('http://www.seek-busines-services.com/API/getComercios.php',paramC)
                     .then(function(response) {
                         if (typeof response.data === 'object') {
                           console.log(response.data);
@@ -776,7 +862,24 @@ return {
                         return $q.reject(response.data);
                     });
      },
+      agregarFav: function(idComercio,idUser) {
+                return  $http.post('http://www.seek-busines-services.com/API/addFav.php',{idUsuario:idUser,idComercio:idComercio})
+                    .then(function(response) {
+                        if (typeof response.data === 'object') {
+                          console.log(response.data);
+                            return response.data;
+                        } else {
+                            // invalid response
+                            console.log(response.data);
+                            return $q.reject(response.data);
+                        }
 
+                    }, function(response) {
+                        // something went wrong
+                        console.log(response);
+                        return $q.reject(response.data);
+                    });
+     },
         getFavs: function(idUser) {
                 return  $http.post('http://www.seek-busines-services.com/API/getFavs.php',{idUsuario:idUser})
                     .then(function(response) {

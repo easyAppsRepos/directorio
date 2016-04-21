@@ -56,11 +56,11 @@
                         <div class='item' style="text-align: center"><a style="color:#1565c0 !important">Favoritos <i class='ion-star'></i></a></div>
                     
 
-                        <div class='item itemFAV' ng-click="login()" ng-repeat='comercio in favs'>
-                      <img src='img/logo3.png'>
+                        <div class='item itemFAV' ng-click="login(comercio.idComercio)" ng-repeat='comercio in favs'>
+                      <img src='http://seek-busines-services.com/API/img/logo_{{comercio.idComercio}}'>
                       <div>
                           <a>{{comercio.nombreComercio}}</a>
-                          <a>Calle Colmena</a>
+                          <a>{{comercio.nombreCiudad}}</a>
                           <a><i class='ion-star'></i><i class='ion-star'></i><i class='ion-star'></i><i class='ion-star'></i><i class='ion-star'></i></a>
                         </div>
                         </div>

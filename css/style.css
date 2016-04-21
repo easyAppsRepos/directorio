@@ -5,6 +5,25 @@
 
 }
 
+.fav{
+  color: lightcoral;
+  font-size: 27px;
+
+opacity: 1;
+vertical-align: middle;
+}
+.noFav{
+font-size: 27px;
+color: lightgray;
+opacity: 1;
+vertical-align: middle;
+}
+
+
+.itemDet img{
+
+  vertical-align: middle;
+}
 .etiquetas a{
   margin-left: 12px;
 height: 38px;
