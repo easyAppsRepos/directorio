@@ -60,7 +60,10 @@ var userId=localStorage.getItem('seekUserId');
 console.log(idComercioP)
 console.log(userId);
 Categorias.agregarFav(idComercioP,userId).then(function(data){
+          $scope.favAct='fav';
+          $scope.labelFav='Favorito';
   console.log(data);
+
 });
 
   }
@@ -589,7 +592,7 @@ $scope.idCategoria=catId;
 
 
 })
-.controller('loginPageCtrl', function($scope,$window,$rootScope, $state,$ionicPopup,$timeout,Usuarios) {
+.controller('loginPageCtrl', function($scope,$window,$rootScope, $state,$ionicPopup,$timeout,Usuarios,$ionicLoading) {
 
 $scope.cerrar=function(){
 
@@ -602,13 +605,20 @@ $scope.cerrar=function(){
 
   $scope.registrarUsuario=function(registro){
 
+ $ionicLoading.show({
+      template: 'Cargando...'
+    });
+
     if(registro==undefined || registro.nombre==undefined || registro.nombre=='' ||registro.correo == undefined  || registro.correo=='' || registro.pass1 == undefined  || registro.pass1=='' || registro.pass2 == undefined || registro.pass2=='') 
     {
+      $ionicLoading.hide();
       alert("Todos los campos deben ser rellenados");
+
       return true;
     }
     else{
         if(registro.pass1!==registro.pass2){
+             $ionicLoading.hide();
     alert('contrasena no conciden');
     return true;
         }
@@ -617,8 +627,13 @@ $scope.cerrar=function(){
           //registrar
     
          Usuarios.registrarUsuario(registro).then(function(data){
-          if(data.status==400){alert("Correo electronico en uso")}
-             if(data.status==200){alert("Registro Exitoso")}
+          if(data.status==400){
+               $ionicLoading.hide();
+            alert("Correo electronico en uso");
+          }
+             if(data.status==200){
+                 $ionicLoading.hide();
+              alert("Registro Exitoso")}
 
 })
 
@@ -633,11 +648,16 @@ $scope.cerrar=function(){
 var log;
 $scope.signIn=function(user){
 
+   $ionicLoading.show({
+      template: 'Cargando...'
+    });
+
 console.log($window.localStorage);
 
       Usuarios.logUsuario(user).then(function(data){
         console.log(data.data);
       if(data.length<1){
+        $ionicLoading.hide();
         alert("Credenciales invalidas")
       }
       if(data.length>0){
@@ -648,7 +668,7 @@ console.log($window.localStorage);
         $window.localStorage['seekUserName']=data[0].nombreUser;
         $window.localStorage['seekUserEmail']=user.correo;
        // alert("exito");
- 
+       $ionicLoading.hide();
         $state.go('app.playlists');
       }
 

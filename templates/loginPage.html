@@ -16,9 +16,9 @@
         <p style="font-size: 13px;">Tu busqueda en linea</p>
           </div>
 
-          <form novalidate class='loginForm' name="loginForm" ng-submit="loginForm.$valid && signIn(user)">
+          <form novalidate class='loginForm' name="loginForm" ng-submit="signIn(user)">
           <div class="list">
-            <label class="itemLogin item item-input item-floating-label" ng-class="{ 'has-error' : loginForm.txtemail.$invalid && loginForm.$submitted }" style="border: 1px solid gray;">
+            <label class="itemLogin item item-input item-floating-label"  style="border: 1px solid gray;">
              <i class="iconLogin icon ion-person placeholder-icon"></i>
               <span class="input-label">Email</span>
               <input name="txtemail" type="email" ng-model="user.email" placeholder="Email"
@@ -27,13 +27,8 @@
               required>
             </label>
             <!-- Edit this messages if you want -->
-            <div class="form-errors" ng-messages="loginForm.txtemail.$error" ng-if="loginForm.$submitted">
-              <div class="form-error" ng-message="required">Este campo es requerido</div>
-              <div class="form-error" ng-message="email">Este espacio debe ser un email</div>
-              <div class="form-error" ng-message="minlength">Al menos debe ser de 5 caracteres</div>
-              <div class="form-error" ng-message="maxlength">Debe ser menor a 30 carateres</div>
-            </div>
-            <label class="itemLogin item item-input item-floating-label" ng-class="{ 'has-error-lr' : loginForm.txtPassword.$invalid && loginForm.$submitted }" style="border: 1px solid gray;">
+      
+            <label class="itemLogin item item-input item-floating-label"  style="border: 1px solid gray;">
                <i class="iconLogin icon ion-locked placeholder-icon"></i>
               <span class="input-label">Contrasena</span>
 
@@ -43,11 +38,7 @@
               required>
             </label>
             <!-- Edit this messages if you want -->
-            <div class="form-err  ors" ng-messages="loginForm.txtPassword.$error" ng-if="loginForm.$submitted">
-            <div class="form-error" ng-message="required">Este campo es requerido</div>
-            <div class="form-error" ng-message="minlength">Al menos debe ser de 5 caracteres.</div>
-            <div class="form-error" ng-message="maxlength">Debe ser menor a 30 caracteres</div>
-            </div>
+
           </div>
            <div class="padding-top">
     
