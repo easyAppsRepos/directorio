@@ -1,4 +1,18 @@
 /* Empty. Add your own CSS if you like */
+.faceBtn{
+-moz-user-select: none !important;
+background: #2A49A5 !important;
+border: 1px solid #082783 !important;
+box-shadow: 0 1px #4C6BC7 inset !important;
+color: white !important;
+padding: 3px 5px !important;
+text-decoration: none !important;
+text-shadow: 0 -1px 0 #082783 !important;
+font: 12px Verdana, sans-serif !important;
+
+
+}
+
 
 .etiquetas{
       width: 100%;

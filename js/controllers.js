@@ -608,7 +608,92 @@ $scope.idCategoria=catId;
 
 
 })
-.controller('loginPageCtrl', function($scope,$window,$rootScope, $state,$ionicPopup,$timeout,Usuarios,$ionicLoading) {
+.controller('loginPageCtrl', function($scope,$window,$rootScope, $state, $firebaseObject, $ionicPopup, $timeout, Usuarios, $ionicLoading) {
+
+
+$scope.loginFace = function (){
+
+   $ionicLoading.show({
+      template: 'Cargando...'
+    });
+
+
+console.log('loginFAce');
+
+    var ref = new Firebase("https://seekerline.firebaseio.com");
+    ref.authWithOAuthPopup("facebook", function(error, authData) {
+      if (error) {
+        console.log("Login Failed!", error);
+      } else {
+
+
+        console.log("Authenticated successfully with payload:", authData);  
+        console.log(authData);
+
+      Usuarios.loginFace(authData.facebook.email).then(function(data){
+        console.log(data.data);
+      if(data.length<1 || data.data==null){
+
+        //Es la primera vez del usuario en loguear con facebook.
+        var registro={nombre:authData.facebook.displayName, correo:authData.facebook.email,logFace:1}
+                Usuarios.registrarUsuario(registro).then(function(datas){
+                if(datas.status==400){
+                $ionicLoading.hide();
+                alert("Correo electronico en uso");
+                }
+                if(datas.status==200){
+                $ionicLoading.hide();
+                console.log("Registro Exitoso");
+                          $rootScope.$broadcast('userName', { name: datas[0].nombreUser });
+                          console.log(datas[0].idUser);
+                          console.log(datas[0].nombreUser);
+                          $window.localStorage['seekUserId']=datas[0].idUser;
+                          $window.localStorage['seekUserName']=datas[0].nombreUser;
+                          $window.localStorage['seekUserEmail']=authData.facebook.email;
+                          // alert("exito");
+                          $ionicLoading.hide();
+                          $state.go('app.playlists');
+              }
+
+                });
+
+//se regustra 
+       // $ionicLoading.hide();
+        //alert("Credenciales invalidas")
+      }
+      if(data.data.length>0){
+        $rootScope.$broadcast('userName', { name: data.data[0].nombreUser });
+        console.log(data.data[0].idUser);
+        console.log(data.data[0].nombreUser);
+        $window.localStorage['seekUserId']=data.data[0].idUser;
+        $window.localStorage['seekUserName']=data.data[0].nombreUser;
+        $window.localStorage['seekUserEmail']=authData.facebook.email;
+       // alert("exito");
+       $ionicLoading.hide();
+        $state.go('app.playlists');
+      }
+
+      });
+
+
+        /*
+        $rootScope.$broadcast('userName', { name: data[0].nombreUser });
+        console.log(data[0].idUser);
+        console.log(data[0].nombreUser);
+        $window.localStorage['seekUserId']=data[0].idUser;
+        $window.localStorage['seekUserName']=data[0].nombreUser;
+        $window.localStorage['seekUserEmail']=user.correo;
+        */
+       // alert("exito");
+       //$ionicLoading.hide();
+        //$state.go('app.playlists');
+
+      }
+    },{scope:"email"});
+
+}
+
+
 
 $scope.cerrar=function(){
 
@@ -618,7 +703,7 @@ $scope.cerrar=function(){
         console.log(window.localStorage);
 
 }
-
+  
   $scope.registrarUsuario=function(registro){
 
  $ionicLoading.show({
@@ -978,6 +1063,28 @@ return {
                     });
 
   },
+  loginFace:function(user){
+      return  $http.post('http://www.seek-busines-services.com/API/logFace.php',{email:user})
+                    .then(function(response) {
+            
+                     
+                        if (typeof response.data === 'object') {
+                          console.log(response);
+                            return response;
+                        } else {
+                            // invalid response
+                             console.log(response);
+                            return response;
+                        }
+
+                    }, function(response) {
+                        // something went wrong
+                         console.log(response);
+                        return response;
+                    });
+
+  },
+
     registrarUsuario: function(usuario) {
       return  $http.post('http://www.seek-busines-services.com/API/registrarUsuario.php',usuario)
                     .then(function(response) {
