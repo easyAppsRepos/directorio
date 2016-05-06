@@ -222,7 +222,7 @@ function onCapturePhoto(fileURI,name) {
             retries = 0;
             clearCache();
               $ionicLoading.hide();
-                alert("Ha ocurrido un error");
+                alert("Ha ocurrido un error, vuelva a intentarlo");
         }
     }
  
