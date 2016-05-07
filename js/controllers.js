@@ -201,6 +201,7 @@ var retries = 0;
 function onCapturePhoto(fileURIArray,name) {
 
   var procesar = function (fileURI,findex){
+    console.log(fileURI +'--'+ findex);
     console.log("En onCapturePhotoPP");
       var win = function (r) {
           clearCache();
@@ -237,7 +238,7 @@ function onCapturePhoto(fileURIArray,name) {
        ft.upload(fileURI, encodeURI('http://www.seek-busines-services.com/API/subirFotoo.php'), win, fail, options);
    }
 
-   for(var i=0;fileURIArray.length>i;i++){
+   for(var i=1;fileURIArray.length>=i;i++){
     procesar(fileURIArray[i],i);
    }
 
