@@ -238,7 +238,7 @@ function onCapturePhoto(fileURIArray,name) {
        ft.upload(fileURI, encodeURI('http://www.seek-busines-services.com/API/subirFotoo.php'), win, fail, options);
    }
 console.log('leng: '+fileURIArray.length);
-   for(i = 1; fileURIArray.length>=i; i++){
+   for(i = 1; fileURIArray.length>i; i++){
     procesar(fileURIArray[i],i);
    }
 
