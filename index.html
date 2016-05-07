@@ -39,6 +39,8 @@
   
     <ion-list ng-controller='categoriasCtrl'>
       <ion-radio ng-repeat='cat in groups[0].items' ng-model="choice" ng-click='setCategoria(cat.nombre,cat.id);' ng-value="cat.id">{{cat.nombre}}</ion-radio>
+
+                  <ion-radio  ng-model="choice" ng-click='setCategoria("Otra Categoria",99);' ng-value="cat.id">Otra categoria</ion-radio>
     
 </ion-list>
         

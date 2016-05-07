@@ -174,7 +174,7 @@ Categorias.getCategorias().then(function(data){
 
 })
 
-.controller('publicarComercioCtrl', function($scope, $cordovaCamera, $cordovaFileTransfer, Ubicacion, $window,$ionicModal,Comercios, $rootScope, $timeout, $ionicLoading, $q, $ionicPopup,$state) {
+.controller('publicarComercioCtrl', function($scope, $cordovaCamera, $cordovaFileTransfer, Categorias, Ubicacion, $window,$ionicModal,Comercios, $rootScope, $timeout, $ionicLoading, $q, $ionicPopup,$state) {
 $scope.propuesta={};
 $scope.paises=[];
 $scope.ciudades=[];
@@ -342,6 +342,19 @@ $rootScope.$on('propuestaCategoria', function(event, args) {
 $scope.addComercio=function(){
 
 
+if($scope.propuesta.idCategoria==99){
+
+Categorias.addCategoria($scope.propuesta.nuevaCategoria).then(function(data){
+
+ $scope.propuesta.idCategoria =data;
+  console.log(data);
+  console.log("agregarCategori");
+console.log($scope.propuesta.nuevaCategoria);
+
+});
+
+}
+
 if(typeof $scope.imgURI=='undefined'){
 
   alert("Debes al menos una foto");
@@ -391,6 +404,9 @@ comercio.correoElectronico=typeof $scope.propuesta.correoElectronico == 'undefin
 comercio.pagWeb=typeof $scope.propuesta.pagWeb == 'undefined' ? '' : $scope.propuesta.pagWeb;
 comercio.numeroContacto=typeof $scope.propuesta.numeroContacto == 'undefined' ? '' : $scope.propuesta.numeroContacto;
 comercio.identificacionComercio=typeof $scope.propuesta.identificacionComercio == 'undefined' ? '' : $scope.propuesta.identificacionComercio;
+
+comercio.direccion=typeof $scope.propuesta.direccion == 'undefined' ? '' : $scope.propuesta.direccion;
+comercio.codigoPostal = typeof $scope.propuesta.codigoPostal == 'undefined' ? -1 : $scope.propuesta.codigoPostal;
 
 
 comercio.idTipoIdentificacion=0;
@@ -981,6 +997,26 @@ paramC.idSubCategoria=idSub;
 
 
     },
+    addCategoria:function(nombreCategoria){
+      return  $http.post('http://www.seek-busines-services.com/API/addCategoria.php',{nombreCategoria:nombreCategoria})
+                    .then(function(response) {
+                        if (typeof response.data === 'object') {
+                          console.log(response);
+                            return response.data;
+                        } else {
+                          console.log(response);
+                            // invalid response
+                            return response.data;
+                        }
+
+                    }, function(response) {
+                        // something went wrong
+                        return response.data;
+                    });
+
+
+    },
+
 
         getCategoriasPopulares: function() {
                 return  $http.post('http://www.seek-busines-services.com/API/getCategoriasPopulares.php')
