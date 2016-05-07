@@ -237,14 +237,15 @@ function onCapturePhoto(fileURIArray,name) {
        var ft = new FileTransfer();
        ft.upload(fileURI, encodeURI('http://www.seek-busines-services.com/API/subirFotoo.php'), win, fail, options);
    }
-
-   for(var i=1;fileURIArray.length>=i;i++){
+console.log('leng: '+fileURIArray.length);
+   for(i = 1; fileURIArray.length>=i; i++){
     procesar(fileURIArray[i],i);
    }
 
                $ionicLoading.hide();
+               fileURIArray=[];
             $scope.propuesta={};
-       
+            $scope.imgURI=[];
             $state.go('app.playlists');
 
 }
