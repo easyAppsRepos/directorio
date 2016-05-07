@@ -9,17 +9,64 @@
    </ion-nav-buttons> 
 
   <ion-content style='background-color: rgb(238, 238, 238);'>
-
+<div style="height: 20px"></div>
  
-            <div>
-            <div>
+<div id="container" ng-click='takePhoto(1)'>
+    <div id="dummy"></div>
+    <div style="" id="element">
+    <div  ng-show="imgURI[1] == undefined">
+    <i style="display: block; font-size: 24px; margin-top: calc(50% - 45px);" class="ion-android-add-circle">
+    </i>
+        Agregar Logo
+        </div>
+
+        <div  ng-show="imgURI[1] !== undefined">
+          <img class='imagenPropuesta' ng-src="{{imgURI[1]}}" style="text-align: center">
+        </div>
+    </div>
+</div>
+
+ <!--
             <img src='img/camera.png' ng-click='takePhoto()'>
-            </div>
+            -->
+<div id="container" ng-click='takePhoto(2)'>
+    <div id="dummy"></div>
+    <div style="" id="element">
+    <div  ng-show="imgURI[2] == undefined">
+    <i style="display: block; font-size: 24px; margin-top: calc(50% - 45px);" class="ion-android-add-circle">
+    </i>
+        Agregar Foto
+        </div>
+
+        <div  ng-show="imgURI[2] !== undefined">
+          <img class='imagenPropuesta' ng-src="{{imgURI[2]}}" style="text-align: center">
+        </div>
+    </div>
+</div>
+
+<div id="container" ng-click='takePhoto(3)'>
+    <div id="dummy"></div>
+    <div style="" id="element">
+    <div  ng-show="imgURI[3] == undefined">
+    <i style="display: block; font-size: 24px; margin-top: calc(50% - 45px);" class="ion-android-add-circle">
+    </i>
+        Agregar Foto
+        </div>
+
+        <div  ng-show="imgURI[3] !== undefined">
+          <img class='imagenPropuesta' ng-src="{{imgURI[3]}}" style="text-align: center">
+        </div>
+    </div>
+</div>
+
+
+<!--
             <div>
         <center>
             <img class='imagenPropuesta' ng-show="imgURI !== undefined" ng-src="{{imgURI}}" style="text-align: center">
         </center>
             </div>
+            -->
             </div>
               <div class="list">
 

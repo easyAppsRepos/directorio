@@ -179,7 +179,7 @@ $scope.propuesta={};
 $scope.paises=[];
 $scope.ciudades=[];
 $scope.distritos=[];
-
+$scope.imgURI=[];
   $scope.tipoE=true;
   $scope.propuesta.tipoE=true;
 
@@ -198,41 +198,54 @@ function clearCache() {
 }
  
 var retries = 0;
-function onCapturePhoto(fileURI,name) {
+function onCapturePhoto(fileURIArray,name) {
 
-  console.log("En onCapturePhotoPP");
-    var win = function (r) {
-        clearCache();
-        retries = 0;
+  var procesar = function (fileURI,findex){
+    console.log("En onCapturePhotoPP");
+      var win = function (r) {
+          clearCache();
+          retries = 0;
+  
+          //  $ionicLoading.hide();
+            //$scope.propuesta={};
+            console.log("foto:"+findex);
+           // $state.go('app.playlists');
+  
+      }
+   
+      var fail = function (error) {
+          if (retries == 0) {
+              retries ++
+              setTimeout(function() {
+                  procesar(fileURI,findex)
+              }, 1000)
+          } else {
+              retries = 0;
+              clearCache();
+               // $ionicLoading.hide();
+                  console.log("Ha ocurrido un error, vuelva a intentarlo");
+          }
+      }
+   
+   
+       var options = new FileUploadOptions();
+       options.fileKey = "file";
+       options.fileName = 'logo_'+name+findex;
+       options.mimeType = "image/jpeg";
+       options.params = {}; // if we need to send parameters to the server request
+       var ft = new FileTransfer();
+       ft.upload(fileURI, encodeURI('http://www.seek-busines-services.com/API/subirFotoo.php'), win, fail, options);
+   }
 
-          $ionicLoading.hide();
-          $scope.propuesta={};
-          alert("Comercio ingresado correctamente");
-          $state.go('app.playlists');
+   for(var i=0;fileURIArray.length>i;i++){
+    procesar(fileURIArray[i],i);
+   }
 
-    }
- 
-    var fail = function (error) {
-        if (retries == 0) {
-            retries ++
-            setTimeout(function() {
-                onCapturePhoto(fileURI)
-            }, 1000)
-        } else {
-            retries = 0;
-            clearCache();
-              $ionicLoading.hide();
-                alert("Ha ocurrido un error, vuelva a intentarlo");
-        }
-    }
- 
-    var options = new FileUploadOptions();
-    options.fileKey = "file";
-    options.fileName = 'logo_'+name;
-    options.mimeType = "image/jpeg";
-    options.params = {}; // if we need to send parameters to the server request
-    var ft = new FileTransfer();
-    ft.upload(fileURI, encodeURI('http://www.seek-busines-services.com/API/subirFotoo.php'), win, fail, options);
+               $ionicLoading.hide();
+            $scope.propuesta={};
+       
+            $state.go('app.playlists');
+
 }
  
 function capturePhoto() {
@@ -249,7 +262,7 @@ function onFail(message) {
 
 
 
-    $scope.takePhoto = function () {
+    $scope.takePhoto = function (number) {
    var isOnline = true;
    if(isOnline){
 
@@ -268,7 +281,7 @@ function onFail(message) {
 
       $cordovaCamera.getPicture(options).then(function (imageData) {
       //    $scope.imgURI = "data:image/jpeg;base64," + imageData;
-      $scope.imgURI=imageData;
+      $scope.imgURI[number]=imageData;
 
       console.log("idasidasdo");
 
@@ -329,7 +342,7 @@ $scope.addComercio=function(){
 
 if(typeof $scope.imgURI=='undefined'){
 
-  alert("Debes elegir un logo");
+  alert("Debes al menos una foto");
   return true;
 }
 
