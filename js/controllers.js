@@ -187,10 +187,11 @@ $scope.ciudadesNombre=[];
 $scope.distritosNombre=[];
 
 $scope.getGeo=function(comercio){
-
+console.log(comercio);
+console.log($scope.propuesta.idPais);
 var str = $scope.propuesta.idPais;
 var res = str.split("-"); 
-var pais=codigoPais=res[1];
+var pais=res[1];
 
 
 var ciudad=$scope.ciudadesNombre[$scope.propuesta.idCiudad];
