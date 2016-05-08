@@ -174,7 +174,7 @@ Categorias.getCategorias().then(function(data){
 
 })
 
-.controller('publicarComercioCtrl', function($scope, $cordovaCamera, $cordovaFileTransfer, Categorias, Ubicacion, $window,$ionicModal,Comercios, $rootScope, $timeout, $ionicLoading, $q, $ionicPopup,$state) {
+.controller('publicarComercioCtrl', function($scope, $cordovaCamera, $http, $cordovaFileTransfer, Categorias, Ubicacion, $window,$ionicModal,Comercios, $rootScope, $timeout, $ionicLoading, $q, $ionicPopup,$state) {
 $scope.propuesta={};
 $scope.paises=[];
 $scope.ciudades=[];
@@ -183,6 +183,46 @@ $scope.imgURI=[];
   $scope.tipoE=true;
   $scope.propuesta.tipoE=true;
 
+$scope.ciudadesNombre=[];
+$scope.distritosNombre=[];
+
+$scope.getGeo=function(comercio){
+
+var str = $scope.propuesta.idPais;
+var res = str.split("-"); 
+var pais=codigoPais=res[1];
+
+
+var ciudad=$scope.ciudadesNombre[$scope.propuesta.idCiudad];
+var distrito=$scope.distritosNombre[$scope.propuesta.idDistrito];
+
+console.log(pais+'-'+ciudad+'-'+distrito);
+
+
+   $http.post('https://maps.googleapis.com/maps/api/geocode/json?address='+ciudad+'+'+distrito+'&components=country:'+pais+'&key=AIzaSyDgfZI6nqaGyhW5XX4OhHBP2uRt7bso6p0')
+                    .then(function(response) {
+
+                      comercio.lat=response.data.results[0].geometry.location.lat;
+                      comercio.lng=response.data.results[0].geometry.location.lng;
+                      console.log(comercio);
+                      Comercios.publicarComercio(comercio).then(function(data){
+                            console.log(data);
+                          if(data.status==200){
+
+                          onCapturePhoto($scope.imgURI,data.data);
+                          }
+                          else{
+                            $ionicLoading.hide();
+                            alert("Ha ocurrido un error");
+                          }
+                          });
+                    }, function(response) {
+                        // something went wrong
+                                $ionicLoading.hide();
+                            alert("Ha ocurrido un error, vuelve a intentarlo");
+                    });
+
+};
 
 Ubicacion.getPaises().then(function(data){
   $scope.paises=data;
@@ -312,9 +352,18 @@ $scope.seleccionarFoto=function(){
 //fin funciones camara.
 
 $scope.actualizarCiudad=function(idPais){
+//$scope.ciudadesNombre[]=;
 
   //console.log(idPais);
   Ubicacion.getCiudades(idPais).then(function(data){
+
+data.forEach( function (arrayItem)
+{
+    $scope.ciudadesNombre[parseInt(arrayItem.idCiudad)]=arrayItem.nombreCiudad;
+
+});
+
+
   $scope.ciudades=data;
   console.log($scope.ciudades);
 });
@@ -323,8 +372,18 @@ $scope.actualizarCiudad=function(idPais){
 
 $scope.actualizarDistrito=function(idCiudad){
 
+
+
   //console.log(idPais);
   Ubicacion.getDistritos(idCiudad).then(function(data){
+
+    data.forEach( function (arrayItem)
+{
+    $scope.distritosNombre[parseInt(arrayItem.idDistrito)]=arrayItem.nombreDistrito;
+
+});
+
+
   $scope.distritos=data;
   console.log($scope.distritos);
 });
@@ -379,6 +438,13 @@ if(typeof $scope.propuesta.idCiudad=='undefined'){
   return true;
 }
 
+if(typeof $scope.propuesta.idDistrito=='undefined'){
+
+  alert("Debes especificar un barrio o distrito");
+  return true;
+}
+
+
 
 
     $ionicLoading.show({
@@ -393,8 +459,15 @@ comercio=$scope.propuesta;
 if($scope.propuesta.tipoE){comercio.idTipoActividad=0}
 if($scope.propuesta.tipoP){comercio.idTipoActividad=1}
 
+if(typeof $scope.propuesta.idPais !== 'undefined'){
+var strv = $scope.propuesta.idPais;
+var res = strv.split("-"); 
+var idP=parseInt(res[0]);
+}
+
+
 comercio.idUsuario=parseInt(localStorage.getItem('seekUserId'));
-comercio.idPais= typeof $scope.propuesta.idPais == 'undefined' ? -1 :parseInt($scope.propuesta.idPais);
+comercio.idPais= typeof $scope.propuesta.idPais == 'undefined' ? -1 :idP;
 comercio.idCiudad= typeof $scope.propuesta.idCiudad == 'undefined' ? -1 :parseInt($scope.propuesta.idCiudad);
 comercio.idDistrito= typeof $scope.propuesta.idDistrito == 'undefined' ? -1 :parseInt($scope.propuesta.idDistrito);
 comercio.idCategoria=typeof $scope.propuesta.idCategoria == 'undefined' ? -1 :parseInt($scope.propuesta.idCategoria);
@@ -413,19 +486,7 @@ comercio.idTipoIdentificacion=0;
 
 
 console.log(comercio);
-Comercios.publicarComercio(comercio).then(function(data){
-  console.log(data);
-if(data.status==200){
-
-onCapturePhoto($scope.imgURI,data.data);
-}
-else{
-  $ionicLoading.hide();
-  alert("Ha ocurrido un error");
-}
-});
-
-
+$scope.getGeo(comercio);
 
 }
   
@@ -506,8 +567,11 @@ $scope.actualizarDistrito=function(idCiudad){
 
 $scope.actualizarCiudad=function(idPais){
 
+var res = idPais.split("-"); 
+var idPaiss=parseInt(res[0]);
+
   //console.log(idPais);
-  Ubicacion.getCiudades(idPais).then(function(data){
+  Ubicacion.getCiudades(idPaiss).then(function(data){
   $scope.ciudades=data;
   console.log($scope.ciudades);
 });

@@ -4,6 +4,9 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
+
+//clave google maps:
+// AIzaSyDgfZI6nqaGyhW5XX4OhHBP2uRt7bso6p0 
 angular.module('starter', ['ionic', 'starter.controllers','ngCordova','firebase'])
 
 .run(function($ionicPlatform) {

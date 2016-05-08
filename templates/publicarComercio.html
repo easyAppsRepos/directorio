@@ -168,7 +168,7 @@ display: inline-block;'>Particular</ion-checkbox>
     </div>
   <select  ng-change='actualizarCiudad(propuesta.idPais)' ng-model='propuesta.idPais' style="background-color: rgb(234, 234, 234) ! important;">
 
-      <option ng-repeat='pais in paises' value={{pais.idPais}}>{{pais.nombrePais}}</option>
+      <option ng-repeat='pais in paises' value='{{pais.idPais}}-{{pais.codigoISO}}'>{{pais.nombrePais}}</option>
      
     </select>
   </label>
