@@ -188,10 +188,9 @@ $scope.distritosNombre=[];
 
 $scope.getGeo=function(comercio){
 console.log(comercio);
-console.log($scope.propuesta.idPais);
-var str = $scope.propuesta.idPais;
-var res = str.split("-"); 
-var pais=res[1];
+console.log($scope.propuesta.cp);
+ 
+var pais=$scope.propuesta.cp;
 
 
 var ciudad=$scope.ciudadesNombre[$scope.propuesta.idCiudad];
@@ -462,8 +461,9 @@ if($scope.propuesta.tipoP){comercio.idTipoActividad=1}
 
 if(typeof $scope.propuesta.idPais !== 'undefined'){
 var strv = $scope.propuesta.idPais;
-var res = strv.split("-"); 
-var idP=parseInt(res[0]);
+var resw = strv.split("-"); 
+$scope.propuesta.cp=resw[1];
+var idP=parseInt(resw[0]);
 }
 
 
