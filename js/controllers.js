@@ -747,7 +747,7 @@ console.log('loginFAce');
                           $window.localStorage['seekUserName']=datas[0].nombreUser;
                           $window.localStorage['seekUserEmail']=authData.facebook.email;
                           // alert("exito");
-                          $scope.pushK(data[0].idUser);
+                          $scope.pushK(datas[0].idUser);
                           $ionicLoading.hide();
                           $state.go('app.playlists');
               }
@@ -765,7 +765,7 @@ console.log('loginFAce');
         $window.localStorage['seekUserId']=data.data[0].idUser;
         $window.localStorage['seekUserName']=data.data[0].nombreUser;
         $window.localStorage['seekUserEmail']=authData.facebook.email;
-        $scope.pushK(data[0].idUser);
+        $scope.pushK(data.data[0].idUser);
        // alert("exito");
        $ionicLoading.hide();
         $state.go('app.playlists');
