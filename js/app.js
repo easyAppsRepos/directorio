@@ -13,6 +13,56 @@ angular.module('starter', ['ionic', 'starter.controllers','ngCordova','firebase'
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
+
+
+
+
+//PUSH FUNCIONANDO
+
+ var push = PushNotification.init({
+    "android": {
+        "senderID": "332867885048"
+    },
+    "ios": {
+        "alert": "true",
+        "badge": "true",
+        "sound": "true"
+    },
+    "windows": {}
+});
+
+push.on('registration', function(data) {
+    
+   //alert("alert1");
+   //alert(data.registrationId);
+   console.log('regsustr');
+      localStorage.setItem('pushKeySK', data.registrationId);
+   //localStorage.setItem('pushKeyGD', data.registrationId);
+
+
+
+});
+
+push.on('notification', function(data) {
+
+  //alert('Tienes una notificacion: '+data.title);
+    $rootScope.$broadcast('pushNuevo');
+console.log(data);
+});
+
+push.on('error', function(e) {
+    console.log(e.message);
+
+});
+//push final 
+
+
+
+
+
+
+
+
     if (window.cordova && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
       cordova.plugins.Keyboard.disableScroll(true);

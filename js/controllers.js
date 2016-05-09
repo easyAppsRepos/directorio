@@ -704,7 +704,7 @@ $scope.idCategoria=catId;
 
 
 })
-.controller('loginPageCtrl', function($scope,$window,$rootScope, $state, $firebaseObject, $ionicPopup, $timeout, Usuarios, $ionicLoading) {
+.controller('loginPageCtrl', function($scope,$window,$rootScope, $state, $firebaseObject, $ionicPopup, $timeout, Usuarios, $ionicLoading, PushNoti) {
 
 
 $scope.loginFace = function (){
@@ -747,6 +747,7 @@ console.log('loginFAce');
                           $window.localStorage['seekUserName']=datas[0].nombreUser;
                           $window.localStorage['seekUserEmail']=authData.facebook.email;
                           // alert("exito");
+                          $scope.pushK(data[0].idUser);
                           $ionicLoading.hide();
                           $state.go('app.playlists');
               }
@@ -764,6 +765,7 @@ console.log('loginFAce');
         $window.localStorage['seekUserId']=data.data[0].idUser;
         $window.localStorage['seekUserName']=data.data[0].nombreUser;
         $window.localStorage['seekUserEmail']=authData.facebook.email;
+        $scope.pushK(data[0].idUser);
        // alert("exito");
        $ionicLoading.hide();
         $state.go('app.playlists');
@@ -841,6 +843,31 @@ $scope.cerrar=function(){
 
   }
 
+$scope.pushK=function(userID){
+
+//pusjj
+        if(localStorage.getItem('pushKeySK')){
+        var pushKeySK=  localStorage.getItem('pushKeySK');
+        var device= ionic.Platform.platform();
+        var uuid=ionic.Platform.device().uuid;
+        var logIn = Date.now();
+
+
+        var pushState = { 
+        pushK:pushKeySK, 
+        device:device,
+        deviceId:uuid,
+        login: logIn
+        }
+
+        console.log(pushState);
+     var sessionPID= PushNoti.addPush(userID, device, pushKeySK, logIn, uuid);
+  
+
+        }else{console.log("nopushK");}
+//endPush
+
+}
 
 var log;
 $scope.signIn=function(user){
@@ -865,6 +892,7 @@ console.log($window.localStorage);
         $window.localStorage['seekUserName']=data[0].nombreUser;
         $window.localStorage['seekUserEmail']=user.correo;
        // alert("exito");
+       $scope.pushK(data[0].idUser);
        $ionicLoading.hide();
         $state.go('app.playlists');
       }
@@ -877,7 +905,7 @@ console.log($window.localStorage);
 }
 
 })
-.controller('PlaylistsCtrl', function($scope, $state, Categorias, $rootScope) {
+.controller('PlaylistsCtrl', function($scope, $state, Categorias, $rootScope, $cordovaGeolocation) {
 
 $rootScope.$on('userName', function(event, args) {
   console.log('asdsad222333');
@@ -885,6 +913,23 @@ $rootScope.$on('userName', function(event, args) {
  $scope.nombreUser=args.name;
 
 });
+
+$scope.buscarCercanos=function(){
+  var posOptions = {timeout: 10000, enableHighAccuracy: false};
+$cordovaGeolocation.getCurrentPosition(posOptions).then(function (position) {
+          var lat  = position.coords.latitude;
+          var lng = position.coords.longitude;
+          console.log(lat+'-'+lng)
+             Categorias.getCercanos(lat,lng).then(function(data){
+               console.log(data);
+               $scope.cercanos=data;
+             });
+        });
+
+
+
+
+}
 
 
 $scope.nombreUser=localStorage.getItem('seekUserName');
@@ -1117,6 +1162,26 @@ paramC.idSubCategoria=idSub;
                         return $q.reject(response.data);
                     });
      },
+
+             getCercanos: function(lat,lng) {
+                return  $http.post('http://www.seek-busines-services.com/API/getCercanos.php',{lat:lat, lng:lng})
+                    .then(function(response) {
+                        if (typeof response.data === 'object') {
+                          console.log(response.data);
+                            return response.data;
+                        } else {
+                            // invalid response
+                            console.log(response.data);
+                            return $q.reject(response.data);
+                        }
+
+                    }, function(response) {
+                        // something went wrong
+                        console.log(response);
+                        return $q.reject(response.data);
+                    });
+     },
+
         getFavs: function(idUser) {
                 return  $http.post('http://www.seek-busines-services.com/API/getFavs.php',{idUsuario:idUser})
                     .then(function(response) {
@@ -1320,8 +1385,64 @@ return {
   }
 
   }
+})
+
+.factory('PushNoti', function($http, $q) {
+
+
+
+
+return{
+
+        addPush:function(idUser, soDevice, pushKey, logIn, deviceID){  
+
+
+      return  $http.post('http://www.seek-busines-services.com/API/addPush.php',{idUser:idUser, soDevice:soDevice, pushKey:pushKey, logIn:logIn, deviceID:deviceID})
+                    .then(function(response) {
+                        if (typeof response.data === 'object') {
+                          console.log(response);
+                            return response.data;
+                        } else {
+                          console.log(response);
+                            // invalid response
+                            return response.data;
+                        }
+
+                    }, function(response) {
+                        // something went wrong
+                        return response.data;
+                    });
+
+
+
+  
+  },
+
+  getNotificaciones:function(idUser){
+
+    var itemsRef = new Firebase('https://golddate.firebaseio.com/app/notificaciones/'+idUser);
+     var defer = $q.defer();
+     var notis=[];
+     itemsRef.once("value", function(snapshot) {
+      //var nameSnapshot = snapshot.child("companyName");
+      //var name = nameSnapshot.val();
+                    snapshot.forEach(function(item,index){
+                      var tempo={};
+                      tempo=item.val();
+                      tempo.keyNoti=item.key();
+                
+                notis.push(tempo);
+                console.log(tempo);
+
+              });
+
+      console.log(notis);
+      defer.resolve(notis); //this does not return the data
+    });
+    return defer.promise;
+
+  }
+
+
+}
 });
-
-
-
-

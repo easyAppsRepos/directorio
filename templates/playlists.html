@@ -73,9 +73,18 @@
          </ion-content>
 
         </ion-tab  >
-        <ion-tab title="Descubre">
+        <ion-tab  title="Descubre">
          <ion-content  style='top: 221px; background-color: #eeeeee '>
          	   	<div class='tabContainer'>
+              <button ng-click='buscarCercanos()'>Buscar Cercanos</button>
+                       <div class='item itemFAV' ng-click="login(comercio.idComercio)" ng-repeat='comercio in cercanos'>
+                      <img src='http://seek-busines-services.com/API/img/logo_{{comercio.idComercio}}'>
+                      <div>
+                          <a>{{comercio.nombreComercio}}</a>
+                          <a>{{comercio.nombreCiudad}}</a>
+                          <a><i class='ion-star'></i><i class='ion-star'></i><i class='ion-star'></i><i class='ion-star'></i><i class='ion-star'></i></a>
+                        </div>
+                        </div>
 
          	</div>
          </ion-content>
