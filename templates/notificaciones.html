@@ -4,7 +4,7 @@
 
 
   <ion-content style='background-color: rgb(238, 238, 238);'>
-<div style="margin-top: 45px"></div>
+
   
       <!--
           <div style="text-align: center; padding-top: 30px">
@@ -21,7 +21,7 @@
                             <h2 style='display: inline-block;'>{{noti.titulo}}</h2>
                             <p >{{noti.cuerpo}}</p>
                          
-                        <ion-option-button  ng-click="infoBuscador('{{noti.idUsuarioBusca}}')" class="button-balanced icon ion-information-circled"></ion-option-button>
+                        <ion-option-button  ng-click="infoBuscador('{{noti.idUsuarioBusca}}', '{{noti.cuerpo}}')" class="button-balanced icon ion-information-circled"></ion-option-button>
 
                         <ion-option-button ng-click='borrarNoti("{{noti.idNotificacion}}")' class="button-assertive icon ion-trash-a"></ion-option-button>
                     </ion-item>

@@ -514,7 +514,7 @@ $scope.labelNombre='Nombre de la empresa';
 
 .controller('notificacionesCtrl', function($scope, $ionicModal,Categorias, $ionicPopup) {
 
-$scope.infoBuscador=function(e){
+$scope.infoBuscador=function(e,c){
 
 Categorias.getDatosUsuario(e).then(function(data){
 console.log(data);
@@ -523,7 +523,7 @@ console.log(data);
    var myPopup = $ionicPopup.show({
    //  template: '<input type="number" style="text-align:center" placeholder="S./0" ng-model="data.wifi">',
      title: 'Informacion del cliente',
-     subTitle: 'Quien ha realizado la busqueda:<br></h2><br><h4>'+nombre+'</h4><br><h4>'+correo+'</h4>',
+     subTitle: 'Descripcion de la busqueda:'+c+'<br></h2><br><h4>'+nombre+'</h4><br><h4>'+correo+'</h4>',
      scope: $scope,
      buttons: [
        {
@@ -700,6 +700,12 @@ if(!($scope.etiquetas.distrito==undefined ||$scope.etiquetas.distrito=='' )){
 $scope.etiquetasItem.push('Distrito');
 paramsBusqueda.distrito=$scope.etiquetas.distrito;
 }
+
+if(!($scope.etiquetas.descripcion==undefined ||$scope.etiquetas.descripcion=='' )){
+$scope.etiquetasItem.push('descripcion');
+paramsBusqueda.descripcion=$scope.etiquetas.descripcion;
+}
+
 
 Busqueda.buscarComercio(paramsBusqueda).then(function(data){
   $scope.resultadosBusqueda=data;
