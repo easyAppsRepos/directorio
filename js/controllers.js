@@ -924,6 +924,7 @@ $scope.pushK=function(userID){
         console.log(pushState);
      var sessionPID= PushNoti.addPush(userID, device, pushKeySK, logIn, uuid);
     $window.localStorage['seekUserPUSHKEY']=sessionPID;
+    console.log(sessionPID);
 
         }else{console.log("nopushK");}
 //endPush
