@@ -855,6 +855,10 @@ $scope.cerrar=function(){
         $window.localStorage['seekUserId']=undefined;
         $window.localStorage['seekUserName']=undefined;
         $window.localStorage['seekUserEmail']=undefined;
+        //localStorage.getItem('seekUserPUSHKEY')
+         if(localStorage.getItem('pushKeySK')){
+        PushNoti.removePush(localStorage.getItem('seekUserPUSHKEY'));
+      }
         console.log(window.localStorage);
 
 }
@@ -919,7 +923,7 @@ $scope.pushK=function(userID){
 
         console.log(pushState);
      var sessionPID= PushNoti.addPush(userID, device, pushKeySK, logIn, uuid);
-  
+    $window.localStorage['seekUserPUSHKEY']=sessionPID;
 
         }else{console.log("nopushK");}
 //endPush
@@ -1508,6 +1512,31 @@ return {
 
 return{
 
+
+
+        removePush:function(idPush){  
+
+
+      return  $http.post('http://www.seek-busines-services.com/API/removePush.php',{idPush:idPush})
+                    .then(function(response) {
+                        if (typeof response.data === 'object') {
+                          console.log(response);
+                            return response.data;
+                        } else {
+                          console.log(response);
+                            // invalid response
+                            return response.data;
+                        }
+
+                    }, function(response) {
+                        // something went wrong
+                        return response.data;
+                    });
+
+
+
+  
+  },
         addPush:function(idUser, soDevice, pushKey, logIn, deviceID){  
 
 
