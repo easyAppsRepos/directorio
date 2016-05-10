@@ -46,7 +46,7 @@ push.on('registration', function(data) {
 push.on('notification', function(data) {
 
   //alert('Tienes una notificacion: '+data.title);
-    $rootScope.$broadcast('pushNuevo');
+
 console.log(data);
 });
 

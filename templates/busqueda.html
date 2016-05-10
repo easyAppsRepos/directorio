@@ -57,6 +57,12 @@
 	</div>
 
 	<div class="list" ng-show='enBusqueda' style="margin-bottom: 0px;width: 90%;margin-left: 5%;">
+
+   <label class="item " style="margin-top: 6px;">
+                 <textarea ng-model='propuesta.descripcion' style="width: 100%; height: 100px;" placeholder="Describe tu busqueda" maxlength="150"></textarea>
+                 </label>
+
+
 		<label  class="borderBot item itemForms"  ng-click="openModal('fade-in-scale','my-modal2.html')">
 			<div  style="color: rgb(102, 102, 102); ">{{categoriaSeleccionada}}</div>
 		</label>

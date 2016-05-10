@@ -4,7 +4,7 @@
         xmlns       =    "http://www.w3.org/ns/widgets"
         xmlns:gap   =    "http://phonegap.com/ns/1.0"
         versionCode =   "1">
-  <name>Seekerline</name>
+  <name>SKBuser</name>
   <description>
         Seekerline
     </description>
@@ -50,4 +50,7 @@
 
    <gap:plugin name="cordova-plugin-whitelist" version="1.0.0" source="npm" />
   <gap:plugin name="cordova-plugin-network-information" source="npm" version="1.0.1" />
+
+    <icon src="icon.jpg" />
+
 </widget>
