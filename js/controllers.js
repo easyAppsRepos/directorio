@@ -512,10 +512,58 @@ $scope.labelNombre='Nombre de la empresa';
 
 })
 
-.controller('notificacionesCtrl', function($scope, $ionicModal) {
+.controller('notificacionesCtrl', function($scope, $ionicModal,Categorias, $ionicPopup) {
+
+$scope.infoBuscador=function(e){
+
+Categorias.getDatosUsuario(e).then(function(data){
+console.log(data);
+  var nombre=data[0].nombreUsuario;
+  var correo=data[0].usuarioCorreo;
+   var myPopup = $ionicPopup.show({
+   //  template: '<input type="number" style="text-align:center" placeholder="S./0" ng-model="data.wifi">',
+     title: 'Informacion del cliente',
+     subTitle: 'Quien ha realizado la busqueda:<br></h2><br><h4>'+nombre+'</h4><br><h4>'+correo+'</h4>',
+     scope: $scope,
+     buttons: [
+       {
+         text: '<b>Cerrar</b>',
+         type: 'button-positive'
+       }
+     ]
+   });
+
+});
+
+console.log(e);
+};
 
 
+$scope.borrarNoti=function(idBorrar){
 
+Categorias.borrarNoti(idBorrar).then(function(data){
+  console.log('sada22222');
+ $scope.getNotis();
+
+});
+
+};
+
+
+$scope.getNotis = function(){
+Categorias.getNotificaciones(localStorage.getItem('seekUserId')).then(function(data){
+$scope.notificaciones=data;
+console.log(data);
+});
+}
+
+$scope.getNotis();
+/*
+$scope.notificaciones=[{titulo:'Tu actividad ha sido buscada', 
+                        subTitulo:'Alguien desea contratar tus servicios',
+                         }]
+
+*/
 })
 
 
@@ -601,6 +649,9 @@ $scope.enBusqueda=true;
 $scope.buscar=function(){
 
   var paramsBusqueda={};
+
+
+paramsBusqueda.idUsuarioBusca=localStorage.getItem('seekUserId');
 
 if(!($scope.etiquetas.input==undefined ||$scope.etiquetas.input=='' )){
 $scope.etiquetasItem.push($scope.etiquetas.input);
@@ -1089,6 +1140,63 @@ paramC.idSubCategoria=idSub;
 
     },
 
+ borrarNoti: function(idNoti) {
+                return  $http.post('http://www.seek-busines-services.com/API/borrarNoti.php',{idNoti:idNoti})
+                    .then(function(response) {
+                        if (typeof response.data === 'object') {
+                          console.log(response.data);
+                            return response.data;
+                        } else {
+                            // invalid response
+                            console.log(response.data);
+                            return response.data;
+                        }
+
+                    }, function(response) {
+                        // something went wrong
+                        console.log(response);
+                        return $q.reject(response.data);
+                    });
+     },
+
+ getDatosUsuario: function(idUser) {
+                return  $http.post('http://www.seek-busines-services.com/API/getDatosUsuario.php',{idUsuario:idUser})
+                    .then(function(response) {
+                        if (typeof response.data === 'object') {
+                          console.log(response.data);
+                            return response.data;
+                        } else {
+                            // invalid response
+                            console.log(response.data);
+                            return $q.reject(response.data);
+                        }
+
+                    }, function(response) {
+                        // something went wrong
+                        console.log(response);
+                        return $q.reject(response.data);
+                    });
+     },
+
+        getNotificaciones: function(idUser) {
+                return  $http.post('http://www.seek-busines-services.com/API/getNotificaciones.php',{idUsuario:idUser})
+                    .then(function(response) {
+                        if (typeof response.data === 'object') {
+                          console.log(response.data);
+                            return response.data;
+                        } else {
+                            // invalid response
+                            console.log(response.data);
+                            return $q.reject(response.data);
+                        }
+
+                    }, function(response) {
+                        // something went wrong
+                        console.log(response);
+                        return $q.reject(response.data);
+                    });
+     },
+
     getSubCategoria:function(idCat){
       return  $http.post('http://www.seek-busines-services.com/API/getSubCategorias.php',{idCategoria:idCat})
                     .then(function(response) {
@@ -1416,31 +1524,6 @@ return{
 
 
   
-  },
-
-  getNotificaciones:function(idUser){
-
-    var itemsRef = new Firebase('https://golddate.firebaseio.com/app/notificaciones/'+idUser);
-     var defer = $q.defer();
-     var notis=[];
-     itemsRef.once("value", function(snapshot) {
-      //var nameSnapshot = snapshot.child("companyName");
-      //var name = nameSnapshot.val();
-                    snapshot.forEach(function(item,index){
-                      var tempo={};
-                      tempo=item.val();
-                      tempo.keyNoti=item.key();
-                
-                notis.push(tempo);
-                console.log(tempo);
-
-              });
-
-      console.log(notis);
-      defer.resolve(notis); //this does not return the data
-    });
-    return defer.promise;
-
   }
 
 

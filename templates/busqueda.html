@@ -1,5 +1,5 @@
 
-<ion-view view-title="">
+<ion-view view-title="" hide-back-button="true">
 
 
          <ion-nav-buttons side="right" >
@@ -15,7 +15,7 @@
 
 <div class="" style="background-color: rgb(68, 138, 255); height: 127px ! important; position: relative; z-index: 3; width: 100%; color: white;">
           <div style="text-align: center">
-				<p style="font-size: 25px;margin-bottom: 0px;">Seekerline</p>
+				<p style="font-size: 25px;margin-bottom: 0px;">SKBuser</p>
 				<p style="font-size: 13px;">Tu busqueda en linea</p>
           </div>
 	<div class="busquedaPrincipal">
@@ -42,7 +42,7 @@
                     
 
                         <div class='item itemFAV' ng-click="login(comercio.idComercio)" ng-repeat='comercio in resultadosBusqueda'>
-                      <img src='http://seek-busines-services.com/API/img/logo_{{comercio.idComercio}}'>
+                      <img src='http://seek-busines-services.com/API/img/logo_{{comercio.idComercio}}1'>
                       <div>
                           <a>{{comercio.nombreComercio}}</a>
                           <a>{{comercio.nombreCiudad}}</a>
@@ -63,7 +63,7 @@
                  </label>
 
 
-		<label  class="borderBot item itemForms"  ng-click="openModal('fade-in-scale','my-modal2.html')">
+		<label style="margin-top: 4px !important" class="borderBot item itemForms"  ng-click="openModal('fade-in-scale','my-modal2.html')">
 			<div  style="color: rgb(102, 102, 102); ">{{categoriaSeleccionada}}</div>
 		</label>
 		<label  class="borderBot item itemForms"  ng-click="openModal('fade-in-scale','my-modal3.html')">
@@ -76,7 +76,7 @@
 			<ion-checkbox class='itemForms' ng-model="etiquetas.cercania" style='color: #666;font-size: 14px;'>Mas cercanos</ion-checkbox>
 
 			</label>
-      <input ng-show='etiquetas.cercania' type="number" placeholder="1 Km"> </input>
+      <input class='itemForms' style='width: 100%' ng-show='etiquetas.cercania' type="number" placeholder="5 Km"> </input>
 
 			  <label class="borderBot item itemForms item-select">
     <div class="input-label">

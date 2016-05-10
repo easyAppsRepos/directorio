@@ -6,13 +6,28 @@
   <ion-content style='background-color: rgb(238, 238, 238);'>
 <div style="margin-top: 45px"></div>
   
-      
+      <!--
           <div style="text-align: center; padding-top: 30px">
             <img src='img/noti.png'></br>
             <a>No hay notificaciones</a>  
       
           </div>
+-->
 
-             </ion-content>
+	
+	 <ion-list show-delete="false" can-swipe="true">
+                    <ion-item ng-repeat='noti in notificaciones'>
+
+                            <h2 style='display: inline-block;'>{{noti.titulo}}</h2>
+                            <p >{{noti.cuerpo}}</p>
+                         
+                        <ion-option-button  ng-click="infoBuscador('{{noti.idUsuarioBusca}}')" class="button-balanced icon ion-information-circled"></ion-option-button>
+
+                        <ion-option-button ng-click='borrarNoti("{{noti.idNotificacion}}")' class="button-assertive icon ion-trash-a"></ion-option-button>
+                    </ion-item>
+                </ion-list>
+
+
+  </ion-content>
 
 </ion-view>

@@ -1,4 +1,4 @@
-<ion-view view-title="">
+<ion-view view-title="" hide-back-button="true">
 
 
            <ion-nav-buttons side="left">
@@ -9,7 +9,7 @@
 
   <ion-header-bar ng-click='abrirBusqueda()' class="bar bar-subheader bar-positive" style='height: 127px !important;'>
           <div style="text-align: center">
-				<p style="font-size: 25px;margin-bottom: 0px;">Seekerline</p>
+				<p style="font-size: 25px;margin-bottom: 0px;">SKBuser</p>
 				<p style="font-size: 13px;">Tu busqueda en linea</p>
           </div>
 	<div class='busquedaPrincipal'>
@@ -57,7 +57,7 @@
                     
 
                         <div class='item itemFAV' ng-click="login(comercio.idComercio)" ng-repeat='comercio in favs'>
-                      <img src='http://seek-busines-services.com/API/img/logo_{{comercio.idComercio}}'>
+                      <img src='http://seek-busines-services.com/API/img/logo_{{comercio.idComercio}}1'>
                       <div>
                           <a>{{comercio.nombreComercio}}</a>
                           <a>{{comercio.nombreCiudad}}</a>
@@ -76,9 +76,9 @@
         <ion-tab  title="Descubre">
          <ion-content  style='top: 221px; background-color: #eeeeee '>
          	   	<div class='tabContainer'>
-              <button ng-click='buscarCercanos()'>Buscar Cercanos</button>
+              <button class='button button-positive'style='height: 40px;width: 55%;margin-left: 22.5%;margin-top: 16px;margin-bottom: 16px;' ng-click='buscarCercanos()'>Buscar Cercanos</button>
                        <div class='item itemFAV' ng-click="login(comercio.idComercio)" ng-repeat='comercio in cercanos'>
-                      <img src='http://seek-busines-services.com/API/img/logo_{{comercio.idComercio}}'>
+                      <img src='http://seek-busines-services.com/API/img/logo_{{comercio.idComercio}}1'>
                       <div>
                           <a>{{comercio.nombreComercio}}</a>
                           <a>{{comercio.nombreCiudad}}</a>

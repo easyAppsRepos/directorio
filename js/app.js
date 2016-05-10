@@ -152,6 +152,7 @@ push.on('error', function(e) {
     })
 
                 .state('app.notificaciones', {
+                  cache: false,
       url: '/notificaciones',
       views: {
         'menuContent': {
