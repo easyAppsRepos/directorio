@@ -743,7 +743,7 @@ var keya, count = 0;
 for(keya in paramsBusqueda) {
   if(paramsBusqueda.hasOwnProperty(keya)) {
 
-    if(keya=='descripcion'){}
+    if(keya=='descripcion' || keya=='cercania' ){}
       else{
           count++;}
   }
@@ -763,7 +763,7 @@ $scope.$applyAsync();
 
 }
 
-else{alert('Debes especificar algun criterio de busqueda')}
+else{alert('Debes especificar algun criterio de busqueda adicional')}
 
 }
 
