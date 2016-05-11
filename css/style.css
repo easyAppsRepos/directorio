@@ -13,6 +13,17 @@ font: 12px Verdana, sans-serif !important;
 
 }
 
+.titleText{
+  display: inline-block;
+}
+
+.imgLogo{
+
+  height: 50px;
+display: inline-block;
+vertical-align: middle;
+border-radius: 70px;
+}
 
 .etiquetas{
       width: 100%;
@@ -149,7 +160,7 @@ ion-side-menu .heading-item .message {
 
 }
 .tabs-top > .tabs{
-top: 171px !important;
+top: 198px !important;
 background-color: rgb(238, 238, 238);
 }
 .busquedaPrincipal{

@@ -614,6 +614,36 @@ $scope.actualizarDistrito=function(idCiudad){
 }
 
 
+//style search
+
+$scope.groups = [];
+  
+    $scope.groups[0] = {
+      name: 'Tipo',
+      items: ['Categorias','ads']
+    };
+
+  
+  
+  /*
+   * if given group is the selected group, deselect it
+   * else, select the given group
+   */
+  $scope.toggleGroup = function(group) {
+    if ($scope.isGroupShown(group)) {
+      $scope.shownGroup = null;
+    } else {
+      $scope.shownGroup = group;
+    }
+  };
+  $scope.isGroupShown = function(group) {
+    return $scope.shownGroup === group;
+  };
+  
+
+
+//endstyleseac
+
 $scope.actualizarCiudad=function(idPais){
 
 var res = idPais.split("-"); 
@@ -627,6 +657,8 @@ var idPaiss=parseInt(res[0]);
 
 }
 $scope.subCategorias=[];
+
+
 
 $scope.setSubcategoria=function(subCatNombre,idSub){
 $scope.subcategoriaSeleccionada=subCatNombre;
@@ -707,6 +739,19 @@ paramsBusqueda.descripcion=$scope.etiquetas.descripcion;
 }
 
 
+var keya, count = 0;
+for(keya in paramsBusqueda) {
+  if(paramsBusqueda.hasOwnProperty(keya)) {
+
+    if(keya=='descripcion'){}
+      else{
+          count++;}
+  }
+}
+console.log(count);
+
+if(count>1){
+
 Busqueda.buscarComercio(paramsBusqueda).then(function(data){
   $scope.resultadosBusqueda=data;
 console.log(data);
@@ -716,6 +761,9 @@ console.log(paramsBusqueda);
 $scope.enBusqueda=false;
 $scope.$applyAsync();
 
+}
+
+else{alert('Debes especificar algun criterio de busqueda')}
 
 }
 
@@ -893,7 +941,9 @@ $scope.cerrar=function(){
           }
              if(data.status==200){
                  $ionicLoading.hide();
-              alert("Registro Exitoso")}
+              alert("Registro Exitoso");
+              $state.go('loginPage');
+            }
 
 })
 

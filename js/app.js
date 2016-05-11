@@ -113,6 +113,7 @@ push.on('error', function(e) {
     })
 
      .state('registro', {
+      cache: false,
       url: '/registro',
 
           templateUrl: 'templates/registro.html',
