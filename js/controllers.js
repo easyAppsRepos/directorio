@@ -568,7 +568,7 @@ $scope.notificaciones=[{titulo:'Tu actividad ha sido buscada',
 
 
 
-.controller('BusquedaCtrl', function($scope, $ionicModal,$rootScope, Categorias, Ubicacion,Busqueda) {
+.controller('BusquedaCtrl', function($scope, $ionicModal,$rootScope, $ionicScrollDelegate, Categorias, Ubicacion,Busqueda) {
  $scope.paises=[];
   $scope.ciudades=[];
 $scope.etiquetas={};
@@ -760,6 +760,7 @@ console.log(data);
 console.log(paramsBusqueda);
 $scope.enBusqueda=false;
 $scope.$applyAsync();
+$ionicScrollDelegate.scrollTop();
 
 }
 
