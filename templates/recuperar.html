@@ -1,0 +1,24 @@
+ <ion-nav-view view-title="Register" >
+<a href='#/loginPage' style="z-index: 4; height: 50px; width: 50px; position: absolute; font-size: 40px; color: rgb(56, 126, 245) !important; margin-left: 20px; margin-top: 8px; top: 0px; left: 0px;"><i  class="icon ion-android-arrow-back"></i></a>
+  <ion-content style='background-color: rgb(234, 234, 234) !important;'>
+
+
+  <div style="text-align: center; color: rgb(56, 126, 245); margin-top: 50px;">
+        <p style="font-size: 25px;margin-bottom: 0px;">Recupearar Contraseña</p>
+        
+          </div>
+
+          <label style='margin-top: 15px' class="borderBot item itemForms "  >
+          <div style="color: rgb(102, 102, 102); ">Correo electronico</div>
+          </label>
+          <label class="item item-input " style="margin-top: 5px;">
+            <input ng-model='recuperar.correo' type="email" placeholder="tucorreo@correo.com">
+          </label>
+
+
+          <button ng-click='recuperarContra()'style='margin-top:20px;background-color: #387ef5;color: #fff;' class="button button-block button-positive">Recuperar</button>
+            
+
+
+  </ion-content>
+</ion-nav-view>

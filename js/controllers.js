@@ -126,6 +126,41 @@ Categorias.getSubCategoria($stateParams.catId).then(function(data){
 })
 
 
+.controller('recuperarCtrl', function($scope,$state, $ionicModal, $ionicLoading, Categorias, $rootScope, Usuarios) {
+
+$scope.recuperar={};
+
+$scope.recuperarContra = function(){
+
+     $ionicLoading.show({
+      template: 'Cargando...'
+    });
+
+  if(!($scope.recuperar.correo)){alert('Debes especificar un correo')}
+    else{
+
+      Usuarios.recuperarContrasena($scope.recuperar.correo).then(function(data){
+        console.log(data.data);
+      if(data.data<1){
+        $ionicLoading.hide();
+        alert("Credenciales invalidas")
+      }
+      if(data.data>0){
+
+       $ionicLoading.hide();
+       alert('Se ha enviado la contrasena a su correo');
+       $state.go('loginPage');
+     
+      }
+
+      });
+      console.log('recupearr!')
+
+    }
+}
+
+
+})
 .controller('categoriasCtrl', function($scope,$state, $ionicModal,Categorias, $rootScope) {
 
 $scope.goCategoria=function(id){
@@ -834,7 +869,7 @@ console.log('loginFAce');
 
       Usuarios.loginFace(authData.facebook.email).then(function(data){
         console.log(data.data);
-      if(data.length<1 || data.data==null){
+      if(data.data.length<1 || data.data==null){
 
         //Es la primera vez del usuario en loguear con facebook.
         var registro={nombre:authData.facebook.displayName, correo:authData.facebook.email,logFace:1}
@@ -845,15 +880,14 @@ console.log('loginFAce');
                 }
                 if(datas.status==200){
                 $ionicLoading.hide();
+                console.log(datas);
                 console.log("Registro Exitoso");
-                          $rootScope.$broadcast('userName', { name: datas[0].nombreUser });
-                          console.log(datas[0].idUser);
-                          console.log(datas[0].nombreUser);
-                          $window.localStorage['seekUserId']=datas[0].idUser;
-                          $window.localStorage['seekUserName']=datas[0].nombreUser;
+                          $rootScope.$broadcast('userName', { name: authData.facebook.displayName });
+                          $window.localStorage['seekUserId']=datas.data;
+                          $window.localStorage['seekUserName']=authData.facebook.displayName;
                           $window.localStorage['seekUserEmail']=authData.facebook.email;
                           // alert("exito");
-                          $scope.pushK(datas[0].idUser);
+                          $scope.pushK(datas.data);
                           $ionicLoading.hide();
                           $state.go('app.playlists');
               }
@@ -1396,6 +1430,29 @@ paramC.idSubCategoria=idSub;
 .factory('Usuarios', function($http, $q) {
 return {
 
+
+
+  recuperarContrasena:function(user){
+      return  $http.post('http://www.seek-busines-services.com/API/recuperarContrasena.php',{email:user})
+                    .then(function(response) {
+            
+                     
+                        if (typeof response.data === 'object') {
+                          console.log(response);
+                            return response.data;
+                        } else {
+                            // invalid response
+                             console.log(response);
+                            return response;
+                        }
+
+                    }, function(response) {
+                        // something went wrong
+                         console.log(response);
+                        return response;
+                    });
+
+  },
   logUsuario:function(user){
       return  $http.post('http://www.seek-busines-services.com/API/logUsuario.php',user)
                     .then(function(response) {

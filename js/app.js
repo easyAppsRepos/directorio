@@ -112,6 +112,16 @@ push.on('error', function(e) {
       }
     })
 
+
+     .state('recuperar', {
+      cache: false,
+      url: '/recuperar',
+
+          templateUrl: 'templates/recuperar.html',
+          controller: 'recuperarCtrl'
+        
+      })
+
      .state('registro', {
       cache: false,
       url: '/registro',
