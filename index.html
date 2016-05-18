@@ -17,9 +17,20 @@
 
     <!-- ionic/angularjs js -->
     <script src="lib/ionic/js/ionic.bundle.js"></script>
+     <script type="text/javascript"  src='http://maps.googleapis.com/maps/api/js?key=AIzaSyAzB2FNhXiXDe1TnKFMQyoZRASVehAKLvs&sensor=true'></script>
+
             <script src="js/firebase.js"></script>
 <script type="text/javascript" src="js/angularfire.min.js"></script>
     <!-- cordova script (this will be a 404 during development) -->
+
+
+    <script type="text/javascript"  src='js/lodash.min.js'></script>
+<script type="text/javascript"  src='js/rsvp.min.js'></script>
+<script type="text/javascript"  src='js/angular-simple-logger.js'></script>
+
+<script type="text/javascript" src="js/angular-google-maps.min.js"></script>
+
+
     <script src="js/ng-cordova.min.js"></script>
     <script src="cordova.js"></script>
     <!-- your app's js -->
@@ -67,6 +78,18 @@
         </div>
         </ion-modal-view>
         </script>
+
+                <script id="fotosV.html" type="text/ng-template">
+<div class="modal image-modal transparent" ng-click="closeModal()">
+    <ion-slide-box on-slide-changed="slideChanged(index)" show-pager="true" active-slide="activeSlide">
+        <ion-slide ng-repeat="image in pages">
+            <img ng-src="{{image.background}}" class="fullscreen-image"/>
+        </ion-slide>
+    </ion-slide-box>
+</div>
+</script>
+
+
 
 
   </body>

@@ -15,6 +15,52 @@ $scope.correoElectronico='No especificado';
     $scope.modal = modal;
   });
 
+$scope.pages=[];
+$scope.map = { center: { latitude: 45, longitude: -73 }, zoom: 15, options:{
+            mapTypeId: google.maps.MapTypeId.ROADMAP} };
+//images
+
+  $scope.showImages = function(index) {
+    $scope.activeSlide = index;
+    $scope.openModal('slide-in-up','fotosV.html');
+  }
+ 
+
+
+
+  $scope.openModal = function(animation, modalHtml) {
+
+    $ionicModal.fromTemplateUrl(modalHtml, {
+      scope: $scope,
+      animation: animation
+    }).then(function(modal) {
+      $scope.modal = modal;
+      $scope.modal.show();
+    });
+  };
+
+
+  $scope.closeModal = function() {
+    $scope.modal.hide();
+     $scope.modal.remove();
+
+  };
+  //Cleanup the modal when we're done with it!
+  $scope.$on('$destroy', function() {
+ console.log("destruyendo modal");
+  });
+  // Execute action on hide modal
+  $scope.$on('modal.hidden', function() {
+    // Execute action
+  });
+  // Execute action on remove modal
+  $scope.$on('modal.removed', function() {
+    // Execute action
+  });
+  
+
+//images
+
 
 
   $scope.closeLogin = function() {
@@ -23,9 +69,18 @@ $scope.correoElectronico='No especificado';
 
 
   $scope.login = function(idComercio) {
+    
+$scope.pages=[];
+$scope.pages.push({background:"http://seek-busines-services.com/API/img/logo_"+idComercio+"1",text:''});
+$scope.pages.push({background:"http://seek-busines-services.com/API/img/logo_"+idComercio+"2",text:''});
+$scope.pages.push({background:"http://seek-busines-services.com/API/img/logo_"+idComercio+"3",text:''});
 
     Comercios.detalleComercio(idComercio,localStorage.getItem('seekUserId')).then(function(data){
-
+//$scope.$applyAsync(function(){
+  $scope.map = { center: { latitude: parseFloat(data[0].lat), longitude: parseFloat(data[0].lng) }, zoom: 15, options:{
+            mapTypeId: google.maps.MapTypeId.ROADMAP} };
+   console.log($scope.map);
+//});
      $scope.comercioDetalle=data[0];
      if(typeof data[0].numeroContacto !== 'undefined' && data[0].numeroContacto!==''){
           $scope.numeroContacto=data[0].numeroContacto;

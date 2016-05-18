@@ -14,10 +14,25 @@
         Solicitar contacto
         </a>
         -->
-  <ion-content>
+  <ion-content  >
+
+<ui-gmap-google-map  options='maps.options' center='map.center' zoom='map.zoom'></ui-gmap-google-map>
 
  <div style="text-align: center;">
+
+         <div class="item item-body">
+            <a class="item item-list-detail">
+      <ion-scroll direction="x">
+        <img ng-repeat="image in pages" ng-src="{{image.background}}" ng-click="showImages($index)" class="image-list-thumb"/>
+      </ion-scroll>
+    </a>
+
+        </div>
+
+
+ <!--
 <img  style="height: 100%;" src='http://seek-busines-services.com/API/img/logo_{{comercioDetalle.idComercio}}2'>
+-->
 </div>
                      <div class='item itemFAV' >
                         <img src='http://seek-busines-services.com/API/img/logo_{{comercioDetalle.idComercio}}1'>
