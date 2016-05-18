@@ -7,7 +7,7 @@
 
 //clave google maps:
 // AIzaSyDgfZI6nqaGyhW5XX4OhHBP2uRt7bso6p0 
-angular.module('starter', ['ionic', 'starter.controllers','ngCordova','firebase'])
+angular.module('starter', ['ionic', 'starter.controllers','ngCordova','firebase', 'uiGmapgoogle-maps'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
